@@ -248,6 +248,7 @@ public enum JavaDataBaseDictionary {
 
             if(tempSplitKeySearch.length == 2 && tempSplitKeySearch[1] != null && !tempSplitKeySearch[1].equalsIgnoreCase("distinct") && (!partOfSpeechArrayList.contains(tempSplitKeySearch[1]) || !keywordArrayList.contains(tempSplitKeySearch[0]))  ) {
 
+                //displayTempInvalidSecondArgument();
                 displayTempNotFoundMessage();
             }
 
@@ -269,7 +270,7 @@ public enum JavaDataBaseDictionary {
 
                     if(result.equalsIgnoreCase(tempSplitKeySearch[0].toString())) {
 
-                        kevinSet.add(result + " [" + result2 + "]" + result3);
+                        kevinSet.add(result + " [" + result2 + "] " + result3);
                     }
                 }
 
@@ -282,6 +283,11 @@ public enum JavaDataBaseDictionary {
                 keywordIterator = keywordArrayList.iterator();
                 partOfSpeechIterator = partOfSpeechArrayList.iterator();
                 definitionIterator = definitionArrayList.iterator();
+            }
+
+            else if(tempSplitKeySearch.length == 2 && tempSplitKeySearch[1] != null && tempSplitKeySearch[1].equalsIgnoreCase("distinct") && (!partOfSpeechArrayList.contains(tempSplitKeySearch[1]) || !keywordArrayList.contains(tempSplitKeySearch[0]))) {
+
+                displayTempNotFoundMessage();
             }
 
             //Run this if neither above is true
@@ -309,17 +315,50 @@ public enum JavaDataBaseDictionary {
 
             }
 
-            if(tempSplitKeySearch.length > 2) {
+            //When 3 arguments
+
+            //tempSplitKeySearch.length == 2 && tempSplitKeySearch[1] != null && !tempSplitKeySearch[1].equalsIgnoreCase("distinct") && (!partOfSpeechArrayList.contains(tempSplitKeySearch[1]) || !keywordArrayList.contains(tempSplitKeySearch[0]))
+
+            if(tempSplitKeySearch.length > 2 && !tempSplitKeySearch[2].equalsIgnoreCase("distinct")) {
+
+                displayTempNotFoundMessage();
+            }
+
+            else if(tempSplitKeySearch.length > 2 && tempSplitKeySearch[2].equalsIgnoreCase("distinct") && keywordArrayList.contains(tempSplitKeySearch[0]) && partOfSpeechArrayList.contains(tempSplitKeySearch[1])) {
 
                 //System.out.println(tempSplitKeySearch[2]);
 
-                
+                Set<String> kevinSet = new LinkedHashSet<>();
+
+                while(keywordIterator.hasNext() && partOfSpeechIterator.hasNext() && definitionIterator.hasNext()) {
+
+                    String result = keywordIterator.next();
+                    String result2 = partOfSpeechIterator.next();
+                    String result3 = definitionIterator.next();
+
+                    //Add into hash set the keyword entered by user
+
+                    if(result.equalsIgnoreCase(tempSplitKeySearch[0].toString()) && result2.equalsIgnoreCase(tempSplitKeySearch[1])) {
+
+                        kevinSet.add(result + " [" + result2 + "] " + result3);
+                    }
+                }
+
+                //loop through the hash set
+
+                for(String tempDistinct: kevinSet) {
+                    System.out.println("\t " + tempDistinct);
+                }
+
+                keywordIterator = keywordArrayList.iterator();
+                partOfSpeechIterator = partOfSpeechArrayList.iterator();
+                definitionIterator = definitionArrayList.iterator();
+
 
             }
 
 
             System.out.println("\t" + "|");
-
 
 
 
@@ -345,9 +384,7 @@ public enum JavaDataBaseDictionary {
 
     private static void displayTempInvalidSecondArgument() {
 
-        System.out.println("\t" + "|");
         System.out.println("\t" + " <2nd argument must be a part of speech or \"distinct\">");
-        System.out.println("\t" + "|");
     }
 
 
