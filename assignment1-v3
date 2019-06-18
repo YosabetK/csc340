@@ -109,24 +109,19 @@ public enum JavaDataBaseDictionary {
 
         System.out.println("! Loading data. . .");
 
-        Dictionary tempKevinJavaHashDictionary = new Hashtable<>();
+        //Dictionary tempKevinJavaHashDictionary = new Hashtable<>();
 
-        ArrayList<JavaDataBaseDictionary> kevin = new ArrayList<>();
+        //ArrayList<JavaDataBaseDictionary> kevin = new ArrayList<>();
 
         ArrayList<String> keywordArrayList = new ArrayList<>();
         ArrayList<String> partOfSpeechArrayList = new ArrayList<>();
         ArrayList<String> definitionArrayList = new ArrayList<>();
-
-
 
         for(JavaDataBaseDictionary tempValue: JavaDataBaseDictionary.values()) {
 
             String tempKeyword = tempValue.tempKeyword;
             String tempPartOfSpeech = tempValue.tempPartOfSpeech;
             String tempDefinition = tempValue.tempDefinition;
-
-            //tempStorage.add(tempKeyword);
-            //tempKevinJavaHashDictionary.put(tempStorage, tempValue);
 
             partOfSpeechArrayList.add(tempPartOfSpeech);
             keywordArrayList.add(tempKeyword);
@@ -204,27 +199,22 @@ public enum JavaDataBaseDictionary {
 
             System.out.println("\t" + "|");
 
-            if(!tempSplitKeySearch[0].contains("testing")) {
+            if(!keywordArrayList.contains(tempSplitKeySearch[0])) {
 
-                //Will fix soon
-                //working on here currently
+                displayTempNotFoundMessage();
             }
 
-            if(tempSplitKeySearch.length == 1) {
-
-                String result ="";
-                String result2 = "";
-                String result3 = "";
+            else if (tempSplitKeySearch.length == 1) {
 
                 while(keywordIterator.hasNext() && partOfSpeechIterator.hasNext() && definitionIterator.hasNext()) {
 
-                    result = keywordIterator.next();
-                    result2 = partOfSpeechIterator.next();
-                    result3 = definitionIterator.next();
+                    String result = keywordIterator.next();
+                    String result2 = partOfSpeechIterator.next();
+                    String result3 = definitionIterator.next();
 
                     if(result.equalsIgnoreCase(tempSplitKeySearch[0].toString())) {
 
-                        System.out.println("\t " + result + " [" + result2 + "] " + result3);
+                        displayFormatResult(result, result2, result3);
                     }
 
                 }
@@ -239,24 +229,23 @@ public enum JavaDataBaseDictionary {
             }
 
 
+            //Stopped Here, testing and adding something here
+
+            
 
             if(tempSplitKeySearch.length == 2) {
 
                 //System.out.println(tempSplitKeySearch[1]);
 
-                String result ="";
-                String result2 = "";
-                String result3 = "";
-
                 while(keywordIterator.hasNext() && partOfSpeechIterator.hasNext() && definitionIterator.hasNext()) {
 
-                    result = keywordIterator.next();
-                    result2 = partOfSpeechIterator.next();
-                    result3 = definitionIterator.next();
+                    String result = keywordIterator.next();
+                    String result2 = partOfSpeechIterator.next();
+                    String result3 = definitionIterator.next();
 
                     if(result.equalsIgnoreCase(tempSplitKeySearch[0].toString()) && result2.equalsIgnoreCase(tempSplitKeySearch[1].toString())) {
 
-                        System.out.println("\t " + result + " [" + result2 + "] " + result3);
+                        displayFormatResult(result, result2, result3);
                     }
 
                 }
@@ -290,16 +279,19 @@ public enum JavaDataBaseDictionary {
     }
 
 
+    private static void displayFormatResult(String tempKeyword, String tempPartOfSpeech, String tempDefinition) {
+
+        System.out.println("\t " + tempKeyword + " [" + tempPartOfSpeech + "] " + tempDefinition);
+    }
 
 
-
-    public static void displayTempNotFoundMessage() {
+    private static void displayTempNotFoundMessage() {
 
         System.out.println("\t" + " <Not found>");
 
     }
 
-    public static void displayTempInvalidSecondArgument() {
+    private static void displayTempInvalidSecondArgument() {
 
         System.out.println("\t" + "|");
         System.out.println("\t" + " <2nd argument must be a part of speech or \"distinct\">");
