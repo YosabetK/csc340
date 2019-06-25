@@ -66,34 +66,30 @@ bool isDraw(char num1[][3]) {
     return false;
 }
 
-void makeAMove(char tempBoard[][3], char player) {
+void makeAMove(char tempBoard[][3], char tempPlayer) {
     
-    int tempRow;
-    int tempCol;
+    int tempRowPosition;
+    int tempColPosition;
     
-    cout << "Enter a row (0, 1, 2) for player " << player << "   :  ";
+    cout << "Enter a row (0, 1, 2) for player " << tempPlayer << "   :  ";
     
-    cin >> tempRow;
+    cin >> tempRowPosition;
     
-    cout << "Enter a column (0, 1, 2) for player " << player << "   :  ";
+    cout << "Enter a column (0, 1, 2) for player " << tempPlayer << "   :  ";
     
-    cin >> tempCol;
+    cin >> tempColPosition;
     
     for(int i = 0; i < 3; i++) {
         
         for(int j = 0; j < 3; j++) {
             
-            if(i == tempRow && j == tempCol) {
-                //tempBoard[i][j] = tempBoard[tempRow][tempCol];
-                tempBoard[i][j] = player;
-            }
+            if(i == tempRowPosition && j == tempColPosition) 
+                tempBoard[i][j] = tempPlayer;
         }
     }
-    
-    //exit(0);
 }
 
-void displayBoard(char board[][3]) {
+void displayBoard(char tempBoard[][3]) {
     
     for(int i = 0; i < 3; i++) {
         
@@ -101,7 +97,7 @@ void displayBoard(char board[][3]) {
         
         for(int j = 0; j < 3; j++) {
             
-            cout << " | " << board[i][j];
+            cout << " | " << tempBoard[i][j];
         }
         
         cout << " | "<< endl;
