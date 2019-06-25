@@ -68,21 +68,10 @@ bool isDraw(char num1[][3]) {
 
 void makeAMove(char tempBoard[][3], char player) {
     
-    //Takes input from user using cin
-    /*
-        Enter a row (0, 1, 2) for player X   : 0
-        Enter a column (0, 1, 2) for player X: 0
-     */
-    
-    char tempPlayer;
-    //May not be used, but is a variable to track current player making a move
-    
     int tempRow;
     int tempCol;
     
     cout << "Enter a row (0, 1, 2) for player " << player << "   :  ";
-    
-    tempPlayer = player;
     
     cin >> tempRow;
     
@@ -94,8 +83,10 @@ void makeAMove(char tempBoard[][3], char player) {
         
         for(int j = 0; j < 3; j++) {
             
-            if(i == tempRow && j == tempCol)
-                tempBoard[i][j] = tempBoard[tempRow][tempCol];
+            if(i == tempRow && j == tempCol) {
+                //tempBoard[i][j] = tempBoard[tempRow][tempCol];
+                tempBoard[i][j] = player;
+            }
         }
     }
     
@@ -115,8 +106,6 @@ void displayBoard(char board[][3]) {
         
         cout << " | "<< endl;
     }
-    
-    //exit(0);
 }
 
 
