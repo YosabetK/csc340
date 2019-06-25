@@ -172,7 +172,7 @@ void makeAMove(char tempBoard[][3], char tempPlayer) {
             
             //Fix this line 6/25/19 3 AM
             
-            if(i == tempRowPosition && j == tempColPosition && !tempBoard[i][j] == NULL) 
+            if(i == tempRowPosition && j == tempColPosition && tempBoard[i][j] != 'X' && tempBoard[i][j] != 'O') 
                 tempBoard[i][j] = tempPlayer;
         }
     }
@@ -192,6 +192,7 @@ void displayBoard(char tempBoard[][3]) {
         cout << " | "<< endl;
     }
 }
+
 
 
 
