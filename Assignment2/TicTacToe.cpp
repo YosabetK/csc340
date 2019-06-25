@@ -1,8 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
+//It works has been tested for draws and wins! 6/25/2019
 
 /* 
  * File:   main.cpp
@@ -70,24 +67,21 @@ bool isWon(char tempPlayer, char tempBoard[][3]) {
         return true;
     else
         return false;
-   
 }
 
 bool isDraw(char tempBoard[][3]) {
     
-    
-    
-    //Return true if there is draw and all spaces filled up
-    
-    return false;
+    if(tempBoard[0][0] != ' ' && tempBoard[0][1] != ' ' && tempBoard[0][2] != ' ' && tempBoard[1][0] != ' ' && tempBoard[1][1] != ' ' && tempBoard[0][2] != ' ' 
+            && tempBoard[2][0] != ' ' && tempBoard[2][1] != ' ' && tempBoard[2][2] != ' ') {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 bool checkHorizontal(char tempPlayer, char tempBoard[][3]) {
     
-    for(int i = 0; i < 3; i++) {
-        
-        for(int j = 0; j < 3; j++) {
-            
             if(tempBoard[0][0] == tempPlayer && tempBoard[0][1] == tempPlayer && tempBoard[0][2] == tempPlayer) {
                 
                 return true;
@@ -103,15 +97,9 @@ bool checkHorizontal(char tempPlayer, char tempBoard[][3]) {
             else {
                 return false;
             }
-        }
-    }
 }
 
 bool checkVertical(char tempPlayer, char tempBoard[][3]) {
-    
-    for(int i = 0; i < 3; i++) {
-        
-        for(int j = 0; j < 3; j++) {
             
             if(tempBoard[0][0] == tempPlayer && tempBoard[1][0] == tempPlayer && tempBoard[2][0] == tempPlayer) {
                 
@@ -128,16 +116,10 @@ bool checkVertical(char tempPlayer, char tempBoard[][3]) {
             else {
                 return false;
             }
-        }
-    }
 }
 
 bool checkDiagonal(char tempPlayer, char tempBoard[][3]) {
-    
-    for(int i = 0; i < 3; i++) {
-        
-        for(int j = 0; j < 3; j++) {
-            
+           
             if(tempBoard[0][0] == tempPlayer && tempBoard[1][1] == tempPlayer && tempBoard[2][2] == tempPlayer) {
                 
                 return true;
@@ -149,8 +131,6 @@ bool checkDiagonal(char tempPlayer, char tempBoard[][3]) {
             else {
                 return false;
             }
-        }
-    }
 }
 
 void makeAMove(char tempBoard[][3], char tempPlayer) {
@@ -170,9 +150,9 @@ void makeAMove(char tempBoard[][3], char tempPlayer) {
         
         for(int j = 0; j < 3; j++) {
             
-            //Fix this line 6/25/19 3 AM
+            //If there is a spot available and matches specific desired spot, place it
             
-            if(i == tempRowPosition && j == tempColPosition && tempBoard[i][j] != 'X' && tempBoard[i][j] != 'O') 
+            if(i == tempRowPosition && j == tempColPosition && tempBoard[i][j] == ' ') 
                 tempBoard[i][j] = tempPlayer;
         }
     }
