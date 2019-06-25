@@ -19,6 +19,10 @@ bool isDraw(char[][3]);
 void displayBoard(char[][3]);
 void makeAMove(char[][3], char);
 
+bool checkHorizontal(char, char[][3]);
+bool checkVertical(char, char[][3]);
+bool checkDiagonal(char, char[][3]);
+
 int main() {
 	//
 	//	PLEASE DO NOT CHANGE function main
@@ -56,14 +60,97 @@ int main() {
 	return 0;
 }
 
-bool isWon(char player, char num2[][3]) {
+bool isWon(char tempPlayer, char tempBoard[][3]) {
+    
+    bool h = checkHorizontal(tempPlayer, tempBoard);
+    bool v = checkVertical(tempPlayer, tempBoard);
+    bool d = checkDiagonal(tempPlayer, tempBoard);
+    
+    if(h || v || d) 
+        return true;
+    else
+        return false;
+   
+}
+
+bool isDraw(char tempBoard[][3]) {
+    
+    
+    
+    //Return true if there is draw and all spaces filled up
     
     return false;
 }
 
-bool isDraw(char num1[][3]) {
+bool checkHorizontal(char tempPlayer, char tempBoard[][3]) {
     
-    return false;
+    for(int i = 0; i < 3; i++) {
+        
+        for(int j = 0; j < 3; j++) {
+            
+            if(tempBoard[0][0] == tempPlayer && tempBoard[0][1] == tempPlayer && tempBoard[0][2] == tempPlayer) {
+                
+                return true;
+            }
+            else if(tempBoard[1][0] == tempPlayer && tempBoard[1][1] == tempPlayer && tempBoard[1][2] == tempPlayer) {
+                
+                return true;
+            }
+            else if(tempBoard[2][0] == tempPlayer && tempBoard[2][1] == tempPlayer && tempBoard[2][2] == tempPlayer) {
+                
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    }
+}
+
+bool checkVertical(char tempPlayer, char tempBoard[][3]) {
+    
+    for(int i = 0; i < 3; i++) {
+        
+        for(int j = 0; j < 3; j++) {
+            
+            if(tempBoard[0][0] == tempPlayer && tempBoard[1][0] == tempPlayer && tempBoard[2][0] == tempPlayer) {
+                
+                return true;
+            }
+            else if(tempBoard[0][1] == tempPlayer && tempBoard[1][1] == tempPlayer && tempBoard[2][1] == tempPlayer) {
+                
+                return true;
+            }
+            else if(tempBoard[0][2] == tempPlayer && tempBoard[1][2] == tempPlayer && tempBoard[2][2] == tempPlayer) {
+                
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    }
+}
+
+bool checkDiagonal(char tempPlayer, char tempBoard[][3]) {
+    
+    for(int i = 0; i < 3; i++) {
+        
+        for(int j = 0; j < 3; j++) {
+            
+            if(tempBoard[0][0] == tempPlayer && tempBoard[1][1] == tempPlayer && tempBoard[2][2] == tempPlayer) {
+                
+                return true;
+            }
+            else if(tempBoard[0][2] == tempPlayer && tempBoard[1][1] == tempPlayer && tempBoard[2][0] == tempPlayer) {
+                
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    }
 }
 
 void makeAMove(char tempBoard[][3], char tempPlayer) {
