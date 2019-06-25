@@ -1,9 +1,3 @@
-//Edit it compiles, but doesn't print anything, and just runs the while loop
-
-
-
-
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -62,7 +56,7 @@ int main() {
 	return 0;
 }
 
-bool isWon(char num1, char num2[][3]) {
+bool isWon(char player, char num2[][3]) {
     
     return false;
 }
@@ -72,14 +66,31 @@ bool isDraw(char num1[][3]) {
     return false;
 }
 
-void makeAMove(char num1[][3], char num2) {
+void makeAMove(char num1[][3], char player) {
     
-    
+    //Takes input from user using cin
+    /*
+        Enter a row (0, 1, 2) for player X   : 0
+        Enter a column (0, 1, 2) for player X: 0
+     */
 }
 
-void displayBoard(char num1[][3]) {
+void displayBoard(char board[][3]) {
     
+    for(int i = 0; i < 3; i++) {
+        
+        cout << " -------------" << endl;
+        
+        for(int j = 0; j < 3; j++) {
+            
+            cout << " | " << board[i][j];
+        }
+        
+        cout << " | "<< endl;
+    }
     
+    exit(0);
 }
+
 
 
