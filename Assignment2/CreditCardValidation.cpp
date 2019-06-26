@@ -1,5 +1,8 @@
 
 #include <iostream>
+#include <vector>
+#include <iomanip>
+#include <string>
 
 using namespace std;
 
@@ -33,6 +36,55 @@ int main()
 	return 0;
 }
 
+bool isvalidcc(const string& tempx) {
+    /*
+    for(int i = (sizeof(tempx) / sizeof(tempx[0])) - 2, j = (sizeof(tempx) / sizeof(tempx[0])) - 1; 0 <= i || 0 <= j; i -= 2, j -=2) {
+
+    }
+    */
+   
+    
+    int tempTotalValue = 0;
+    
+    int odd = 0;
+    int even = 0;
+     
+    int tempOdd = 0;
+    
+    for(int i = (sizeof(tempx) / sizeof(tempx[0])) - 2;  0 <= i; i -=2) {
+
+        if(i >= 0) {
+            
+            tempOdd = tempx[i];
+            
+            if( (tempOdd * 2 ) > 9 && (tempOdd * 2) < 19) {
+                
+                //odd = odd + ()
+                odd = odd + ( (tempOdd * 2) - 9);
+            }
+            else {
+                odd = odd + (tempx[i] * 2);
+            }
+        }
+    }
+    for(int j = (sizeof(tempx) / sizeof(tempx[0])) - 1;  0 <= j; j -=2) {
+
+       if(j >= 0) {
+           
+           even = even + tempx[j];
+       }
+    }
+    
+    tempTotalValue = odd + even;
+     
+    if( tempTotalValue % 10 == 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+    
+}
 
 
 
