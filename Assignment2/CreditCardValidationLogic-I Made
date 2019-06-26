@@ -11,6 +11,8 @@ if
 
 etc...
 
+if (greater than 9, less than 19) because 9 * 2 = 18 and 0 * 2 = 0, theres no 10, so max is 18
+
 store in x and y variables
 
 x + y
