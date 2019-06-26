@@ -1,0 +1,23 @@
+Credit Card Validation logic I made
+
+
+12 = 1 + 2 = 3
+
+do 12 - 9 = 3
+
+if
+14 = 1 + 4 = 5
+14 - 9 = 5 
+
+etc...
+
+store in x and y variables
+
+x + y
+
+if(x+y % 10 == 0)
+  return true
+else
+  return false
+
+
