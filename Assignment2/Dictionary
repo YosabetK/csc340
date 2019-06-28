@@ -8,20 +8,41 @@ using namespace std;
 
 void openDictionaryFile();
 
-class tempDataBaseDictionaryClass {
-    
-private:
-    
-    map<string, vector<string>> tempStorageMap;
 
-public:
+//string tempPartOfSpeechArray = {"noun", "pronoun", "adjective", "verb", "adverb", "preposition", "conjunction", "interjection"};
+
+class TempDataBaseDictionaryClass {
     
+private:    
+    string tempKeyword, tempPartOfSpeech, tempDefinition;
+    
+    //map<string, vector<string>> tempStorageMap;
+
+public:    
+    tempDataBaseDictionaryClass() {
+        //Empty Constructor
+    }
+    void setKeyWord(string keyword) {
+        tempKeyword = keyword;
+    }
+    string getTempKeyword() {
+        return tempKeyword;
+    }
+    string getTempPartOfSpeech() {
+        return tempPartOfSpeech;
+    }
+    string getTempDefinition() {
+        return tempDefinition;
+    }
+    string toStringFormat() {
+        cout << "\t" << tempKeyword << " [" << tempPartOfSpeech << "] : " << tempDefinition << endl;
+    }
     
 };
 
 int main() {
     
-    string line, next;
+    string line, line2, next;
     fstream inFile;
     cout << "! Opening data file... ./Data.CS.SFSU.txt" << endl;
     if(!inFile) {
@@ -30,12 +51,20 @@ int main() {
     cout << "! Loading data..." << endl;
     inFile.open("C:\\Users\\adazh\\OneDrive\\Desktop\\Data.CS.SFSU.txt", ios::in);
     
-    while(getline(inFile, line)) {
+    while(getline(inFile, line, '|')) {
         
+        //cout << line << endl;
+        //getline(inFile, line2, '-=>>');
         cout << line << endl;
+        
+
+       
     }
     inFile.close();
     cout << "! Closing data file... ./Data.CS.SFSU.txt" << endl;
+    
+    TempDataBaseDictionaryClass temp;
+    //getTempKeyword();
     
     
     
