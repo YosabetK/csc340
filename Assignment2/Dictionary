@@ -4,12 +4,14 @@
 #include <string>
 #include <fstream>
 
+
 using namespace std;
 
-void openDictionaryFile();
+vector<string> seperate(string line, string str);
+map<string, vector<vector<string>> addMap();
 
 
-//string tempPartOfSpeechArray = {"noun", "pronoun", "adjective", "verb", "adverb", "preposition", "conjunction", "interjection"};
+string tempPartOfSpeechArray[] = {"noun", "pronoun", "adjective", "verb", "adverb", "preposition", "conjunction", "interjection"};
 
 class TempDataBaseDictionaryClass {
     
@@ -41,6 +43,8 @@ public:
 };
 
 int main() {
+    vector<string> temp;
+    vector<vector<string>> tempVector;
     
     string line, line2, next;
     fstream inFile;
@@ -51,19 +55,48 @@ int main() {
     cout << "! Loading data..." << endl;
     inFile.open("C:\\Users\\adazh\\OneDrive\\Desktop\\Data.CS.SFSU.txt", ios::in);
     
-    while(getline(inFile, line, '|')) {
+    while(getline(inFile, line)) {
         
         //cout << line << endl;
         //getline(inFile, line2, '-=>>');
-        cout << line << endl;
         
-
+       //cout << line << endl;
        
+       temp = seperate(line, "|");
+       
+       tempVector.push_back(temp);
     }
+    
+    /*
+    vector<string>::iterator itr;
+    vector<vector<string>>::iterator itr2;
+    
+    for(itr2 = tempVector.begin(); itr2 != tempVector.end(); ++itr2) {
+        
+        for(itr = (*itr2).begin(); itr != (*itr2).end(); ++itr) {
+            
+            //cout << *itr << endl;
+            
+            if((*itr).find(" -=>> ") != string::npos) {
+                cout << (*itr) << endl;
+            }
+        }
+    }
+    */
+    
+    
     inFile.close();
     cout << "! Closing data file... ./Data.CS.SFSU.txt" << endl;
     
-    TempDataBaseDictionaryClass temp;
+    /*
+    for(int i = 0; i < tempVector.size(); i++) {
+        
+        cout  << tempVector[i] << endl;
+    }
+    */
+    
+    
+    //TempDataBaseDictionaryClass temp;
     //getTempKeyword();
     
     
@@ -71,10 +104,53 @@ int main() {
     return 0;
 }
 
-void openDictionaryFile() {
+
+map<string, vector<vector<string>> addMap() {
     
-    //C:\Users\adazh\OneDrive\Desktop\Data.CS.SFSU.txt
     
+    
+    /*
+    vector<string>::iterator itr;
+    vector<vector<string>>::iterator itr2;
+    
+    for(itr2 = tempVector.begin(); itr2 != tempVector.end(); ++itr2) {
+        
+        for(itr = (*itr2).begin(); itr != (*itr2).end(); ++itr) {
+            
+            //cout << *itr << endl;
+            
+            if((*itr).find(" -=>> ") != string::npos) {
+                cout << (*itr) << endl;
+            }
+        }
+    }
+    */
 }
 
+vector<string> seperate(string tempLineToSplit, string tempStringSplitter) {
+    
+    vector<string> tempSplittedVector;
+    size_t tempCurrentPosition = 0;
+    string line;
+    
+    while((tempCurrentPosition = tempLineToSplit.find(tempStringSplitter)) != string::npos) {
+        
+        line = tempLineToSplit.substr(0, tempCurrentPosition);
+        //Same as adding string to a vector
+        tempSplittedVector.push_back(line);
+        tempLineToSplit.erase(0, tempCurrentPosition + tempStringSplitter.length());
+    }
+    tempSplittedVector.push_back(tempLineToSplit);
+    
+    /*
+    for(int i = 0; i < tempSplittedVector.size(); i++) {
+        
+        cout  << tempSplittedVector[i] << endl;
+    }
+    */
+    
+    return tempSplittedVector;
+    
+     
+}
 
