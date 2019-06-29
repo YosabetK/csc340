@@ -1,0 +1,129 @@
+
+#include <iostream>
+#include <vector>
+#include <string>
+#include <fstream>
+
+
+using namespace std;
+
+vector<string> seperate(string line, string str);
+
+
+string tempPartOfSpeechArray[] = {"noun", "pronoun", "adjective", "verb", "adverb", "preposition", "conjunction", "interjection"};
+
+class TempDataBaseDictionaryClass {
+    
+private:    
+    string tempKeyword, tempPartOfSpeech, tempDefinition;
+    
+    //map<string, vector<string>> tempStorageMap;
+
+public:    
+    tempDataBaseDictionaryClass() {
+        //Empty Constructor
+    }
+    void setKeyWord(string keyword) {
+        tempKeyword = keyword;
+    }
+    string getTempKeyword() {
+        return tempKeyword;
+    }
+    string getTempPartOfSpeech() {
+        return tempPartOfSpeech;
+    }
+    string getTempDefinition() {
+        return tempDefinition;
+    }
+    string toStringFormat() {
+        cout << "\t" << tempKeyword << " [" << tempPartOfSpeech << "] : " << tempDefinition << endl;
+    }
+    
+};
+
+int main() {
+    vector<string> temp;
+    vector<vector<string>> tempVector;
+    
+    string line, line2, next;
+    fstream inFile;
+    cout << "! Opening data file... ./Data.CS.SFSU.txt" << endl;
+    if(!inFile) {
+        cout << "Cannot open the file: " << endl;
+    }
+    cout << "! Loading data..." << endl;
+    inFile.open("C:\\Users\\adazh\\OneDrive\\Desktop\\Data.CS.SFSU.txt", ios::in);
+    
+    while(getline(inFile, line)) {
+        
+        //cout << line << endl;
+        //getline(inFile, line2, '-=>>');
+        
+       //cout << line << endl;
+       
+       temp = seperate(line, "|");
+       
+       tempVector.push_back(temp);
+    }
+    
+    
+    vector<string>::iterator itr;
+    vector<vector<string>>::iterator itr2;
+    
+    for(itr2 = tempVector.begin(); itr2 != tempVector.end(); ++itr2) {
+        
+        for(itr = (*itr2).begin(); itr != (*itr2).end(); ++itr) {
+            cout << *itr << endl;
+        }
+    }
+    
+    
+    
+    inFile.close();
+    cout << "! Closing data file... ./Data.CS.SFSU.txt" << endl;
+    
+    /*
+    for(int i = 0; i < tempVector.size(); i++) {
+        
+        cout  << tempVector[i] << endl;
+    }
+    */
+    
+    
+    //TempDataBaseDictionaryClass temp;
+    //getTempKeyword();
+    
+    
+    
+    return 0;
+}
+
+
+
+vector<string> seperate(string tempLineToSplit, string tempStringSplitter) {
+    
+    vector<string> tempSplittedVector;
+    size_t tempCurrentPosition = 0;
+    string line;
+    
+    while((tempCurrentPosition = tempLineToSplit.find(tempStringSplitter)) != string::npos) {
+        
+        line = tempLineToSplit.substr(0, tempCurrentPosition);
+        //Same as adding string to a vector
+        tempSplittedVector.push_back(line);
+        tempLineToSplit.erase(0, tempCurrentPosition + tempStringSplitter.length());
+    }
+    tempSplittedVector.push_back(tempLineToSplit);
+    
+    /*
+    for(int i = 0; i < tempSplittedVector.size(); i++) {
+        
+        cout  << tempSplittedVector[i] << endl;
+    }
+    */
+    
+    return tempSplittedVector;
+    
+     
+}
+
