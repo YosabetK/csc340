@@ -133,6 +133,7 @@ int main() {
             string tempEmpty;
             
             if(checkIfMapContains(tempSearchDictionary[0], tempEmpty, tempSearchDictionary.size())) {
+                
                 cout <<"\t True" << endl;
             }
             else {
@@ -147,7 +148,7 @@ int main() {
             }
             else {
                 
-                cout << "\t <Not found>" << endl;
+                cout << "\t <2nd argument must be part of speech or \"distinct\">" << endl;
             }
         }
         
@@ -160,6 +161,7 @@ int main() {
                 
             }
         }
+        
         
         cout << "\t|" << endl;
         
@@ -207,8 +209,10 @@ bool checkIfMapContains(string tempVector1, string tempVector2, int vectorSize) 
         }
             
         for(vector<string>::iterator vec = it->second.begin(); vec != it->second.end(); ++vec) {
-               
-            if((vectorSize == 2) && ((*vec).find(tempVector2) != string::npos) ) {
+             
+            //Also make sure invalid first argument too
+            
+            if( ((vectorSize == 2) && ((*vec).find(tempVector2) != string::npos)) || tempVector2 == "distinct") {
                 return true;
             }
             else {
@@ -222,7 +226,7 @@ bool checkIfMapContains(string tempVector1, string tempVector2, int vectorSize) 
      return tempContains;   
 }
 
-
+ 
 
 map<string, vector<string>> addMap(vector<string> kevin) {
     //map<string, vector<string>> kevinMap;
