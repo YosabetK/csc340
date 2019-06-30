@@ -110,15 +110,32 @@ int main() {
         if(tempUserInputLine == tempConvertToLowerCase("!q")) {
             
             tempSearchState = false; 
-            
+            cout << endl << "-----THANK YOU-----" << endl;
             exit(0);
         }
         
-        
+        cout << "\t\t|" << endl;
     }
     
     return 0;
 }
+
+//Method to search for the keyword user inputs
+//logic:
+//if vector inside map<string, vector<string>>
+//contains tempPartOfSpeech, then print the key and the value that contains that tempPartOfSpeech
+//
+//Now seperate the vector value that matches the key,
+//seperate by -=>> also called splitting
+//first one is the part of speech, second one will be definition
+//
+//splitted[0] is the partofspeech, splitted[1] is the definition
+//Make sure to have another new vector that holds splitted[0] and splitted[1]
+//
+
+
+
+
 
 map<string, vector<string>> addMap(vector<string> kevin) {
     //map<string, vector<string>> kevinMap;
@@ -133,19 +150,18 @@ map<string, vector<string>> addMap(vector<string> kevin) {
         
         //currently looping through the vector
         
-        //If Contains
+        //If Contains -=>> count this as a value, put inside vector of strings
         if((*itr).find(" -=>> ") != string::npos) {
             
             tempValue = (*itr);
             
             //kevinMap[tempKey];
-            //Mostly works
+            //My example how to insert, this is testing it to see if it works
             //kevinMap.insert({tempKey, {"I want to be developer ", " The weather is hot! "}});
             
             //Finding the correct key to add the vector of strings to
             if(kevinMap.find(tempKey) == kevinMap.end()) {
-            
-                //kevinMap[tempKey] = temp;
+
                 kevinMap[tempKey].push_back(tempValue);
                 //kevinMap[tempKey].push_back(tempValue);
             }
@@ -156,7 +172,7 @@ map<string, vector<string>> addMap(vector<string> kevin) {
             //Insert both they key and value together in the map
             kevinMap.insert({tempKey, {temp}});
         }
-        //If Doesn't contain
+        //If Doesn't contain -=>> set the key as the given value from for loop
         else {
  
             tempKey = (*itr);
