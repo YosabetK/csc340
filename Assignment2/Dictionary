@@ -14,6 +14,7 @@ vector<string> seperate(string line, string str);
 //map<string, map<string, vector<string>>> addMap
 
 map<string, vector<string>> kevinMap;
+bool checkIfMapContains(vector<string> tempVectorToCheck);
 map<string, vector<string>> addMap(vector<string> temp);
 string tempConvertToLowerCase(string tempString);
 
@@ -123,8 +124,8 @@ int main() {
         
         if(tempSearchDictionary.size() == 1) {
             
-            if(true) {
-                
+            if(checkIfMapContains(tempSearchDictionary)) {
+                cout <<"\t True" << endl;
             }
             else {
                 cout << "\t <Not found>" << endl;
@@ -149,6 +150,7 @@ int main() {
             }
         }
         
+        cout << "\t|" << endl;
         
         /*Testing to see if it handles the input
         for(vector<string>::iterator itrx = tempSearchDictionary.begin(); itrx != tempSearchDictionary.end(); ++itrx) {
@@ -159,6 +161,7 @@ int main() {
     
     return 0;
 }
+
 
 //Method to search for the keyword user inputs
 //logic:
@@ -174,7 +177,35 @@ int main() {
 //
 //void checkIfContainsKey
 //void checkIfContainsSearchStuff
-bool checkIfMapContains
+bool checkIfMapContains(vector<string> tempVectorToCheck) {
+    
+    //cout << tempVectorToCheck[1] << endl;
+    
+    for(map<string, vector<string>>::iterator it = kevinMap.begin(); it != kevinMap.end(); ++it) {
+        
+        if((tempVectorToCheck.size() == 1) && kevinMap.find(tempVectorToCheck[0]) != kevinMap.end() ) {
+                   
+            return true;
+        }
+        else {
+            return false;
+        }
+            
+        for(vector<string>::iterator vec = it->second.begin(); vec != it->second.end(); ++vec) {
+               
+            if((tempVectorToCheck.size() == 2) && ((*vec).find(tempVectorToCheck[1]) != string::npos) ) {
+                return true;
+            }
+            else {
+                return false;
+            }
+               
+        }
+            
+            //cout << endl;
+        } 
+     //return true;   
+}
 
 
 
@@ -193,6 +224,7 @@ map<string, vector<string>> addMap(vector<string> kevin) {
         
         //If Contains -=>> count this as a value, put inside vector of strings
         if((*itr).find(" -=>> ") != string::npos) {
+
             
             tempValue = (*itr);
             
