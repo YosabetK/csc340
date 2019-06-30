@@ -114,7 +114,47 @@ int main() {
             exit(0);
         }
         
-        cout << "\t\t|" << endl;
+        //cout << "\t|" << endl;
+        
+        vector<string> tempSearchDictionary;
+        tempSearchDictionary = seperate(tempUserInputLine, " ");
+        
+        cout << "\t|" << endl;
+        
+        if(tempSearchDictionary.size() == 1) {
+            
+            if(true) {
+                
+            }
+            else {
+                cout << "\t <Not found>" << endl;
+            }
+        }
+        if(tempSearchDictionary.size() == 2) {
+            
+            if(true) {
+                
+            }
+            else {
+                
+            }
+        }
+        if(tempSearchDictionary.size() > 2) {
+            
+            if(true) {
+                
+            }
+            else {
+                
+            }
+        }
+        
+        
+        /*Testing to see if it handles the input
+        for(vector<string>::iterator itrx = tempSearchDictionary.begin(); itrx != tempSearchDictionary.end(); ++itrx) {
+            cout << *itrx << endl;
+        }
+        */ 
     }
     
     return 0;
@@ -132,8 +172,9 @@ int main() {
 //splitted[0] is the partofspeech, splitted[1] is the definition
 //Make sure to have another new vector that holds splitted[0] and splitted[1]
 //
-
-
+//void checkIfContainsKey
+//void checkIfContainsSearchStuff
+bool checkIfMapContains
 
 
 
@@ -190,6 +231,7 @@ map<string, vector<string>> addMap(vector<string> kevin) {
             }       
         }*/
     }    
+        /*
         for(map<string, vector<string>>::iterator it = kevinMap.begin(); it != kevinMap.end(); ++it) {
             
             //cout << it->first << " ";
@@ -200,7 +242,8 @@ map<string, vector<string>> addMap(vector<string> kevin) {
             }
             
             //cout << endl;
-        }   
+        } 
+        */
     
     return kevinMap;
 }
