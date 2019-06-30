@@ -14,7 +14,11 @@ vector<string> seperate(string line, string str);
 //map<string, map<string, vector<string>>> addMap
 
 map<string, vector<string>> kevinMap;
-bool checkIfMapContains(vector<string> tempVectorToCheck);
+//bool checkIfMapContains(vector<string> tempVectorToCheck);
+//bool checkIfMapContains(vector<string> tempVectorToCheck);
+
+bool checkIfMapContains(string vec1, string vec2, int vecSize);
+
 map<string, vector<string>> addMap(vector<string> temp);
 string tempConvertToLowerCase(string tempString);
 
@@ -122,9 +126,13 @@ int main() {
         
         cout << "\t|" << endl;
         
+        //cout << tempSearchDictionary[0] << endl
+        
         if(tempSearchDictionary.size() == 1) {
             
-            if(checkIfMapContains(tempSearchDictionary)) {
+            string tempEmpty;
+            
+            if(checkIfMapContains(tempSearchDictionary[0], tempEmpty, tempSearchDictionary.size())) {
                 cout <<"\t True" << endl;
             }
             else {
@@ -133,13 +141,16 @@ int main() {
         }
         if(tempSearchDictionary.size() == 2) {
             
-            if(true) {
+            if(checkIfMapContains(tempSearchDictionary[0], tempSearchDictionary[1], tempSearchDictionary.size())) {
                 
+                cout <<"\t True" << endl;
             }
             else {
                 
+                cout << "\t <Not found>" << endl;
             }
         }
+        
         if(tempSearchDictionary.size() > 2) {
             
             if(true) {
@@ -177,34 +188,38 @@ int main() {
 //
 //void checkIfContainsKey
 //void checkIfContainsSearchStuff
-bool checkIfMapContains(vector<string> tempVectorToCheck) {
+
+//Check if the map contains the user input, especially keyword and part of speech
+
+bool checkIfMapContains(string tempVector1, string tempVector2, int vectorSize) {
     
-    //cout << tempVectorToCheck[1] << endl;
+    bool tempContains;
     
     for(map<string, vector<string>>::iterator it = kevinMap.begin(); it != kevinMap.end(); ++it) {
         
-        if((tempVectorToCheck.size() == 1) && kevinMap.find(tempVectorToCheck[0]) != kevinMap.end() ) {
+        if((vectorSize == 1) && kevinMap.find(tempVector1) != kevinMap.end() ) {
                    
             return true;
         }
         else {
-            return false;
+            
+            tempContains = false;
         }
             
         for(vector<string>::iterator vec = it->second.begin(); vec != it->second.end(); ++vec) {
                
-            if((tempVectorToCheck.size() == 2) && ((*vec).find(tempVectorToCheck[1]) != string::npos) ) {
+            if((vectorSize == 2) && ((*vec).find(tempVector2) != string::npos) ) {
                 return true;
             }
             else {
-                return false;
+                
+                tempContains = false;
             }
                
         }
-            
-            //cout << endl;
-        } 
-     //return true;   
+
+    } 
+     return tempContains;   
 }
 
 
