@@ -3,12 +3,17 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <map>
 
 
 using namespace std;
 
 vector<string> seperate(string line, string str);
-map<string, vector<vector<string>> addMap();
+//map<string, vector<vector<string>> addMap();
+//map<string, map<string, vector<string>>> addMap
+
+//map<string, vector<string>> kevin();
+map<string, vector<string>> addMap(vector<string> temp);
 
 
 string tempPartOfSpeechArray[] = {"noun", "pronoun", "adjective", "verb", "adverb", "preposition", "conjunction", "interjection"};
@@ -64,22 +69,27 @@ int main() {
        
        temp = seperate(line, "|");
        
-       tempVector.push_back(temp);
+       //tempVector.push_back(temp);
+       
+       addMap(temp);
     }
     
-    /*
+    
     vector<string>::iterator itr;
     vector<vector<string>>::iterator itr2;
     
+    /*
     for(itr2 = tempVector.begin(); itr2 != tempVector.end(); ++itr2) {
         
         for(itr = (*itr2).begin(); itr != (*itr2).end(); ++itr) {
             
-            //cout << *itr << endl;
+            cout << *itr << endl;
+            
             
             if((*itr).find(" -=>> ") != string::npos) {
-                cout << (*itr) << endl;
+                //cout << (*itr) << endl;
             }
+            
         }
     }
     */
@@ -87,13 +97,6 @@ int main() {
     
     inFile.close();
     cout << "! Closing data file... ./Data.CS.SFSU.txt" << endl;
-    
-    /*
-    for(int i = 0; i < tempVector.size(); i++) {
-        
-        cout  << tempVector[i] << endl;
-    }
-    */
     
     
     //TempDataBaseDictionaryClass temp;
@@ -104,8 +107,76 @@ int main() {
     return 0;
 }
 
+map<string, vector<string>> addMap(vector<string> kevin) {
+    map<string, vector<string>> kevinMap;
+    
+    vector<string> temp;
+    vector<string>::iterator itr;
+    
+    string tempKey;
+    string tempValue;
+    
+    for(itr = kevin.begin(); itr != kevin.end(); ++itr) {
+        
+        //currently looping through the vector
+        
+        //If Contains
+        if((*itr).find(" -=>> ") != string::npos) {
+            
+            tempValue = (*itr);
+            
+            //kevinMap[tempKey];
+            //Mostly works
+            //kevinMap.insert({tempKey, {"I want to be developer ", " The weather is hot! "}});
+            
+            //Finding the correct key to add the vector of strings to
+            if(kevinMap.find(tempKey) == kevinMap.end()) {
+            
+                //kevinMap[tempKey] = temp;
+                kevinMap[tempKey].push_back(tempValue);
+                //kevinMap[tempKey].push_back(tempValue);
+            }
+            else {
+                kevinMap[tempKey].push_back(tempValue);
+            }
+            
+            //Insert both they key and value together in the map
+            kevinMap.insert({tempKey, {temp}});
+        }
+        //If Doesn't contain
+        else {
+ 
+            tempKey = (*itr);
+        }
+        
+        
+        
+        /*
+        if((*itr).find("-=>>") != string::npos) {
+            
+            if(kevinMap.find(tempKey) == kevinMap.end()) {
+            
+                kevinMap[tempKey] = temp;
+                temp.push_back((*itr));
+            }       
+        }*/
+    }    
+        for(map<string, vector<string>>::iterator it = kevinMap.begin(); it != kevinMap.end(); ++it) {
+            
+            cout << it->first << " ";
+            
+            for(vector<string>::iterator vec = it->second.begin(); vec != it->second.end(); ++vec) {
+                
+                cout << *vec;
+            }
+            
+            cout << endl;
+        }   
+ 
+    return kevinMap;
+}
 
-map<string, vector<vector<string>> addMap() {
+//map<string, vector<vector<string>> addMap() {
     
     
     
@@ -125,7 +196,7 @@ map<string, vector<vector<string>> addMap() {
         }
     }
     */
-}
+//}
 
 vector<string> seperate(string tempLineToSplit, string tempStringSplitter) {
     
@@ -148,6 +219,7 @@ vector<string> seperate(string tempLineToSplit, string tempStringSplitter) {
         cout  << tempSplittedVector[i] << endl;
     }
     */
+    
     
     return tempSplittedVector;
     
