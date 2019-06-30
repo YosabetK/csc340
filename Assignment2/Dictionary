@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 #include <map>
+#include <algorithm>
 
 
 using namespace std;
@@ -14,6 +15,7 @@ vector<string> seperate(string line, string str);
 
 map<string, vector<string>> kevinMap;
 map<string, vector<string>> addMap(vector<string> temp);
+string tempConvertToLowerCase(string tempString);
 
 
 string tempPartOfSpeechArray[] = {"noun", "pronoun", "adjective", "verb", "adverb", "preposition", "conjunction", "interjection"};
@@ -71,12 +73,9 @@ int main() {
        
        addMap(temp);
     }
-    
-    
-    
-    vector<string>::iterator itr;
-    vector<vector<string>>::iterator itr2;
-    
+
+    //vector<string>::iterator itr;
+    //vector<vector<string>>::iterator itr2; 
     /*
     for(itr2 = tempVector.begin(); itr2 != tempVector.end(); ++itr2) {
         
@@ -92,16 +91,31 @@ int main() {
         }
     }
     */
-    
-    
     inFile.close();
     cout << "! Closing data file... ./Data.CS.SFSU.txt" << endl;
-    
     
     //TempDataBaseDictionaryClass temp;
     //getTempKeyword();
     
+    //Here is checking the user input
     
+    bool tempSearchState = true;
+    
+    while(tempSearchState) {
+        
+        string tempUserInputLine;
+        cout << "Search: ";
+        getline(cin, tempUserInputLine);
+        
+        if(tempUserInputLine == tempConvertToLowerCase("!q")) {
+            
+            tempSearchState = false; 
+            
+            exit(0);
+        }
+        
+        
+    }
     
     return 0;
 }
@@ -224,4 +238,15 @@ vector<string> seperate(string tempLineToSplit, string tempStringSplitter) {
     
      
 }
+
+string tempConvertToLowerCase(string tempString) {
+    
+    transform(tempString.begin(), tempString.end(), tempString.begin(), ::tolower);
+    
+    return tempString;
+}
+
+
+
+
 
