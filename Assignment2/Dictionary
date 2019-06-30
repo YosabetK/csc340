@@ -12,7 +12,7 @@ vector<string> seperate(string line, string str);
 //map<string, vector<vector<string>> addMap();
 //map<string, map<string, vector<string>>> addMap
 
-//map<string, vector<string>> kevin();
+map<string, vector<string>> kevinMap;
 map<string, vector<string>> addMap(vector<string> temp);
 
 
@@ -69,10 +69,9 @@ int main() {
        
        temp = seperate(line, "|");
        
-       //tempVector.push_back(temp);
-       
        addMap(temp);
     }
+    
     
     
     vector<string>::iterator itr;
@@ -108,7 +107,7 @@ int main() {
 }
 
 map<string, vector<string>> addMap(vector<string> kevin) {
-    map<string, vector<string>> kevinMap;
+    //map<string, vector<string>> kevinMap;
     
     vector<string> temp;
     vector<string>::iterator itr;
@@ -163,16 +162,16 @@ map<string, vector<string>> addMap(vector<string> kevin) {
     }    
         for(map<string, vector<string>>::iterator it = kevinMap.begin(); it != kevinMap.end(); ++it) {
             
-            cout << it->first << " ";
+            //cout << it->first << " ";
             
             for(vector<string>::iterator vec = it->second.begin(); vec != it->second.end(); ++vec) {
                 
-                cout << *vec;
+                //cout << *vec;
             }
             
-            cout << endl;
+            //cout << endl;
         }   
- 
+    
     return kevinMap;
 }
 
