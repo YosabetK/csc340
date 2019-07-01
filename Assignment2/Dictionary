@@ -17,6 +17,8 @@ map<string, vector<string>> kevinMap;
 //bool checkIfMapContains(vector<string> tempVectorToCheck);
 //bool checkIfMapContains(vector<string> tempVectorToCheck);
 
+bool checkPartOfSpeech(string tempPartOfSpeechToBeChecked);
+
 bool checkIfMapContains(string vec1, string vec2, int vecSize);
 
 map<string, vector<string>> addMap(vector<string> temp);
@@ -142,13 +144,17 @@ int main() {
         }
         if(tempSearchDictionary.size() == 2) {
             
-            if(checkIfMapContains(tempSearchDictionary[0], tempSearchDictionary[1], tempSearchDictionary.size())) {
+            if(checkPartOfSpeech(tempSearchDictionary[1]) == false) {
+
+                cout << "\t <2nd argument must be part of speech or \"distinct\">" << endl;
+            }
+            else if(checkIfMapContains(tempSearchDictionary[0], tempSearchDictionary[1], tempSearchDictionary.size())) {
                 
                 cout <<"\t True" << endl;
             }
             else {
                 
-                cout << "\t <2nd argument must be part of speech or \"distinct\">" << endl;
+                cout << "Not Found" << endl;
             }
         }
         
@@ -161,6 +167,7 @@ int main() {
                 
             }
         }
+        
         
         
         cout << "\t|" << endl;
@@ -193,6 +200,32 @@ int main() {
 
 //Check if the map contains the user input, especially keyword and part of speech
 
+bool checkPartOfSpeech(string tempPartOfSpeechToBeChecked) {
+    
+    bool tempFoundPartOfSpeech = false;
+    
+    if(tempPartOfSpeechToBeChecked.compare("distinct") == 0) {
+        
+        return true;
+    }
+    
+    for(int i = 0; i < sizeof(tempPartOfSpeechArray) / sizeof(tempPartOfSpeechArray[0]); i++) {
+        
+        if(tempPartOfSpeechArray[i] == (tempPartOfSpeechToBeChecked)) {
+            
+            return true;
+        }
+        else {
+            
+            tempFoundPartOfSpeech = false; 
+        }
+    }
+    
+    return tempFoundPartOfSpeech;
+}
+
+
+
 bool checkIfMapContains(string tempVector1, string tempVector2, int vectorSize) {
     
     bool tempContains;
@@ -212,7 +245,8 @@ bool checkIfMapContains(string tempVector1, string tempVector2, int vectorSize) 
              
             //Also make sure invalid first argument too
             
-            if( ((vectorSize == 2) && ((*vec).find(tempVector2) != string::npos)) || tempVector2 == "distinct") {
+            if( ((kevinMap.find(tempVector1) != kevinMap.end()) && (vectorSize == 2) && ((*vec).find(tempVector2) != string::npos)) || (tempVector2 == "distinct") ) {
+                
                 return true;
             }
             else {
@@ -225,8 +259,6 @@ bool checkIfMapContains(string tempVector1, string tempVector2, int vectorSize) 
     } 
      return tempContains;   
 }
-
- 
 
 map<string, vector<string>> addMap(vector<string> kevin) {
     //map<string, vector<string>> kevinMap;
