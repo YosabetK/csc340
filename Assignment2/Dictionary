@@ -23,6 +23,7 @@ bool checkPartOfSpeech(string tempPartOfSpeechToBeChecked);
 bool checkIfMapContains(string vec1, string vec2, int vecSize);
 
 map<string, vector<string>> addMap(vector<string> temp);
+vector<string> seperate(string tempLineToSplit, string tempStringSplitter);
 string tempConvertToLowerCase(string tempString);
 
 
@@ -151,7 +152,7 @@ int main() {
             }
             else if(checkIfMapContains(tempSearchDictionary[0], tempSearchDictionary[1], tempSearchDictionary.size())) {
                 
-                cout << "\t True" << endl;
+                printTempDictionaryResult(tempSearchDictionary[0], tempSearchDictionary[1], tempEmpty, tempSearchDictionary.size());
             }
             else {
                 
@@ -185,18 +186,32 @@ int main() {
 
 void printTempDictionaryResult(string tempVector1, string tempVector2, string tempVector3, int size) {
     
+    vector<string> tempSplittedVector;
+    
     for(map<string, vector<string>>::iterator it = kevinMap.begin(); it != kevinMap.end(); ++it) {
             
             //cout << it->first << endl;
             
             for(vector<string>::iterator vec = it->second.begin(); vec != it->second.end(); ++vec) {
                 
-                cout << it->first << " " << *vec << endl;
+                //This is a good setup, need to et rid of that arrow //cout << it->first << " [" << tempVector2 << "] " << *vec << endl;
+                
+                tempSplittedVector = seperate(*vec, " -=>> ");
+                
+                cout << it->first << " [" << tempSplittedVector[0] << "] : " << tempSplittedVector[1] << endl;
+                
+                /*
+                cout << tempSplittedVector[0] << endl;
+                cout << tempSplittedVector[1] << endl;
+                */
+                
+                //cout << it->first << " " << *vec << endl;
             }
             
             //cout << endl;
         } 
 }
+
 
 
 
