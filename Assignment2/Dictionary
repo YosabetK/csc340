@@ -15,7 +15,8 @@ vector<string> seperate(string line, string str);
 
 map<string, vector<string>> kevinMap;
 //bool checkIfMapContains(vector<string> tempVectorToCheck);
-//bool checkIfMapContains(vector<string> tempVectorToCheck);
+
+void printTempDictionaryResult(string tempVector1, string tempVector2, string tempVector3, int size);
 
 bool checkPartOfSpeech(string tempPartOfSpeechToBeChecked);
 
@@ -130,13 +131,13 @@ int main() {
         
         //cout << tempSearchDictionary[0] << endl
         
+        string tempEmpty;
+        
         if(tempSearchDictionary.size() == 1) {
-            
-            string tempEmpty;
             
             if(checkIfMapContains(tempSearchDictionary[0], tempEmpty, tempSearchDictionary.size())) {
                 
-                cout <<"\t True" << endl;
+                printTempDictionaryResult(tempSearchDictionary[0], tempEmpty, tempEmpty, tempSearchDictionary.size());
             }
             else {
                 cout << "\t <Not found>" << endl;
@@ -150,11 +151,11 @@ int main() {
             }
             else if(checkIfMapContains(tempSearchDictionary[0], tempSearchDictionary[1], tempSearchDictionary.size())) {
                 
-                cout <<"\t True" << endl;
+                cout << "\t True" << endl;
             }
             else {
                 
-                cout << "Not Found" << endl;
+                cout << "\t <Not Found>" << endl;
             }
         }
         
@@ -181,6 +182,22 @@ int main() {
     
     return 0;
 }
+
+void printTempDictionaryResult(string tempVector1, string tempVector2, string tempVector3, int size) {
+    
+    for(map<string, vector<string>>::iterator it = kevinMap.begin(); it != kevinMap.end(); ++it) {
+            
+            //cout << it->first << endl;
+            
+            for(vector<string>::iterator vec = it->second.begin(); vec != it->second.end(); ++vec) {
+                
+                cout << it->first << " " << *vec << endl;
+            }
+            
+            //cout << endl;
+        } 
+}
+
 
 
 //Method to search for the keyword user inputs
