@@ -198,11 +198,24 @@ void printTempDictionaryResult(string tempVector1, string tempVector2, string te
                 
                 tempSplittedVector = seperate(*vec, " -=>> ");
                 
-                cout << it->first << " [" << tempSplittedVector[0] << "] : " << tempSplittedVector[1] << endl;
+                //works for sure
+                if(size == 1 && (it->first == tempVector1)) {
                 
-                /*
-                cout << tempSplittedVector[0] << endl;
-                cout << tempSplittedVector[1] << endl;
+                    cout << "\t " << it->first << " [" << tempSplittedVector[0] << "] : " << tempSplittedVector[1] << endl;
+                }
+                
+                if(size == 2 && (it->first == tempVector1) && (tempSplittedVector[0] == tempVector2) ) {
+                    
+                    cout << "\t " << it->first << " [" << tempSplittedVector[0] << "] : " << tempSplittedVector[1] << endl;
+                }
+                
+                
+                
+                
+                /* DO NOT DELETE THIS CODE, THIS IS TESTED TO WORK 100%
+                tempSplittedVector = seperate(*vec, " -=>> ");
+                
+                cout << it->first << " [" << tempSplittedVector[0] << "] : " << tempSplittedVector[1] << endl;
                 */
                 
                 //cout << it->first << " " << *vec << endl;
