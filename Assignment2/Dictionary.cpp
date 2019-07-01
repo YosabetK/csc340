@@ -242,9 +242,17 @@ void printTempDictionaryResult(string tempVector1, string tempVector2, string te
                     tempStringToAdd = "\t " + it->first + " [" + tempSplittedVector[0] + "] : " + tempSplittedVector[1];
                     tempSetToAdd.insert(tempStringToAdd);
                 }
-                else {
-                    tempNotFound = true;
+                
+                if(size == 3 && (it->first == tempVector1) && (tempSplittedVector[0] == tempVector2) && tempVector3 == "distinct") {
+                    
+                    //cout << "\t " << it->first << " [" << tempSplittedVector[0] << "] : " << tempSplittedVector[1] << endl;
+                    
+                    tempStringToAdd.clear();
+                    tempStringToAdd = "\t " + it->first + " [" + tempSplittedVector[0] + "] : " + tempSplittedVector[1];
+                    tempSetToAdd.insert(tempStringToAdd);
                 }
+                
+                
                 /* DO NOT DELETE THIS CODE, THIS IS TESTED TO WORK 100%
                 tempSplittedVector = seperate(*vec, " -=>> ");
                 
@@ -262,7 +270,11 @@ void printTempDictionaryResult(string tempVector1, string tempVector2, string te
             cout << *it << endl; 
         }
     }
-    
+    else if(size == 3 && tempVector3 == "distinct") {
+        for(set<string>::iterator it = tempSetToAdd.begin(); it != tempSetToAdd.end(); ++it) {
+            cout << *it << endl; 
+        }
+    }
 
 }
 
