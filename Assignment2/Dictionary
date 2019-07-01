@@ -5,6 +5,7 @@
 #include <fstream>
 #include <map>
 #include <algorithm>
+#include <set>
 
 
 using namespace std;
@@ -20,7 +21,7 @@ void printTempDictionaryResult(string tempVector1, string tempVector2, string te
 
 bool checkPartOfSpeech(string tempPartOfSpeechToBeChecked);
 
-bool checkIfMapContains(string vec1, string vec2, int vecSize);
+bool checkIfMapContains(string vec1, string vec2, string tempVector3, int vecSize);
 
 map<string, vector<string>> addMap(vector<string> temp);
 vector<string> seperate(string tempLineToSplit, string tempStringSplitter);
@@ -132,15 +133,17 @@ int main() {
         
         //cout << tempSearchDictionary[0] << endl
         
+        
         string tempEmpty;
         
         if(tempSearchDictionary.size() == 1) {
             
-            if(checkIfMapContains(tempSearchDictionary[0], tempEmpty, tempSearchDictionary.size())) {
+            if(checkIfMapContains(tempSearchDictionary[0], tempEmpty, tempEmpty, tempSearchDictionary.size())) {
                 
                 printTempDictionaryResult(tempSearchDictionary[0], tempEmpty, tempEmpty, tempSearchDictionary.size());
             }
             else {
+                
                 cout << "\t <Not found>" << endl;
             }
         }
@@ -150,7 +153,7 @@ int main() {
 
                 cout << "\t <2nd argument must be part of speech or \"distinct\">" << endl;
             }
-            else if(checkIfMapContains(tempSearchDictionary[0], tempSearchDictionary[1], tempSearchDictionary.size())) {
+            else if(checkIfMapContains(tempSearchDictionary[0], tempSearchDictionary[1], tempEmpty, tempSearchDictionary.size())) {
                 
                 printTempDictionaryResult(tempSearchDictionary[0], tempSearchDictionary[1], tempEmpty, tempSearchDictionary.size());
             }
@@ -162,12 +165,21 @@ int main() {
         
         if(tempSearchDictionary.size() > 2) {
             
-            if(true) {
+            if(checkPartOfSpeech(tempSearchDictionary[1]) == false) {
+
+                cout << "\t <2nd argument must be part of speech or \"distinct\">" << endl;
+            }
+            else if(checkIfMapContains(tempSearchDictionary[0], tempSearchDictionary[1], tempSearchDictionary[2], tempSearchDictionary.size())) {
                 
+                cout << "Hello " << endl;
+                
+                printTempDictionaryResult(tempSearchDictionary[0], tempSearchDictionary[1], tempSearchDictionary[2], tempSearchDictionary.size());
             }
             else {
                 
+                cout << "\t <Not Found>" << endl;
             }
+            
         }
         
         
@@ -188,10 +200,23 @@ void printTempDictionaryResult(string tempVector1, string tempVector2, string te
     
     vector<string> tempSplittedVector;
     
+    bool tempNotFound = false;
+    
+    string tempStringToAdd;
+    vector<string> tempVectorToAdd;
+    set<string> tempSetToAdd;
+    
+    tempSetToAdd.clear();
+    
     for(map<string, vector<string>>::iterator it = kevinMap.begin(); it != kevinMap.end(); ++it) {
             
             //cout << it->first << endl;
-            
+        /*
+        if(tempNotFound == false) {
+            cout << "\t <Not Found>" << endl;
+            break;
+        }
+        */  
             for(vector<string>::iterator vec = it->second.begin(); vec != it->second.end(); ++vec) {
                 
                 //This is a good setup, need to et rid of that arrow //cout << it->first << " [" << tempVector2 << "] " << *vec << endl;
@@ -208,10 +233,18 @@ void printTempDictionaryResult(string tempVector1, string tempVector2, string te
                     
                     cout << "\t " << it->first << " [" << tempSplittedVector[0] << "] : " << tempSplittedVector[1] << endl;
                 }
-                
-                
-                
-                
+                //2nd word is "distinct" remove duplicates
+                else if(size == 2 && tempVector2 == "distinct" && (it->first == tempVector1)) {
+                    
+                    //cout << "\t " << it->first << " [" << tempSplittedVector[0] << "] : " << tempSplittedVector[1] << endl;
+                    
+                    tempStringToAdd.clear();
+                    tempStringToAdd = "\t " + it->first + " [" + tempSplittedVector[0] + "] : " + tempSplittedVector[1];
+                    tempSetToAdd.insert(tempStringToAdd);
+                }
+                else {
+                    tempNotFound = true;
+                }
                 /* DO NOT DELETE THIS CODE, THIS IS TESTED TO WORK 100%
                 tempSplittedVector = seperate(*vec, " -=>> ");
                 
@@ -223,9 +256,15 @@ void printTempDictionaryResult(string tempVector1, string tempVector2, string te
             
             //cout << endl;
         } 
+    
+    if(size == 2 && tempVector2 == "distinct") {
+        for(set<string>::iterator it = tempSetToAdd.begin(); it != tempSetToAdd.end(); ++it) {
+            cout << *it << endl; 
+        }
+    }
+    
+
 }
-
-
 
 
 //Method to search for the keyword user inputs
@@ -269,11 +308,11 @@ bool checkPartOfSpeech(string tempPartOfSpeechToBeChecked) {
     return tempFoundPartOfSpeech;
 }
 
-
-
-bool checkIfMapContains(string tempVector1, string tempVector2, int vectorSize) {
+bool checkIfMapContains(string tempVector1, string tempVector2, string tempVector3, int vectorSize) {
     
     bool tempContains;
+    
+    vector<string> tempSplittedVector;
     
     for(map<string, vector<string>>::iterator it = kevinMap.begin(); it != kevinMap.end(); ++it) {
         
@@ -287,18 +326,26 @@ bool checkIfMapContains(string tempVector1, string tempVector2, int vectorSize) 
         }
             
         for(vector<string>::iterator vec = it->second.begin(); vec != it->second.end(); ++vec) {
-             
-            //Also make sure invalid first argument too
+        
+            tempSplittedVector = seperate(*vec, " -=>> ");
+            //((kevinMap.find(tempVector1) != kevinMap.end()) && (vectorSize == 2) && ((*vec).find(tempVector2) != string::npos)) || (tempVector2 == "distinct")
             
-            if( ((kevinMap.find(tempVector1) != kevinMap.end()) && (vectorSize == 2) && ((*vec).find(tempVector2) != string::npos)) || (tempVector2 == "distinct") ) {
+            if( (vectorSize == 2) && (tempSplittedVector[0] == tempVector2) || (tempVector2 == "distinct") ) {
                 
                 return true;
             }
             else {
                 
                 tempContains = false;
+            }   
+            if( (vectorSize > 2) && (tempSplittedVector[0] == tempVector2) && (tempVector3 == "distinct") ) {
+                
+                return true;
             }
-               
+            else {
+                
+                tempContains = false;
+            }            
         }
 
     } 
@@ -321,7 +368,6 @@ map<string, vector<string>> addMap(vector<string> kevin) {
         //If Contains -=>> count this as a value, put inside vector of strings
         if((*itr).find(" -=>> ") != string::npos) {
 
-            
             tempValue = (*itr);
             
             //kevinMap[tempKey];
@@ -336,8 +382,7 @@ map<string, vector<string>> addMap(vector<string> kevin) {
             }
             else {
                 kevinMap[tempKey].push_back(tempValue);
-            }
-            
+            }        
             //Insert both they key and value together in the map
             kevinMap.insert({tempKey, {temp}});
         }
@@ -345,10 +390,7 @@ map<string, vector<string>> addMap(vector<string> kevin) {
         else {
  
             tempKey = (*itr);
-        }
-        
-        
-        
+        } 
         /*
         if((*itr).find("-=>>") != string::npos) {
             
@@ -376,10 +418,7 @@ map<string, vector<string>> addMap(vector<string> kevin) {
     return kevinMap;
 }
 
-//map<string, vector<vector<string>> addMap() {
-    
-    
-    
+//map<string, vector<vector<string>> addMap() {  
     /*
     vector<string>::iterator itr;
     vector<vector<string>>::iterator itr2;
@@ -419,11 +458,7 @@ vector<string> seperate(string tempLineToSplit, string tempStringSplitter) {
         cout  << tempSplittedVector[i] << endl;
     }
     */
-    
-    
-    return tempSplittedVector;
-    
-     
+    return tempSplittedVector;     
 }
 
 string tempConvertToLowerCase(string tempString) {
@@ -432,7 +467,6 @@ string tempConvertToLowerCase(string tempString) {
     
     return tempString;
 }
-
 
 
 
