@@ -83,24 +83,6 @@ int main() {
        
        addMap(temp);
     }
-
-    //vector<string>::iterator itr;
-    //vector<vector<string>>::iterator itr2; 
-    /*
-    for(itr2 = tempVector.begin(); itr2 != tempVector.end(); ++itr2) {
-        
-        for(itr = (*itr2).begin(); itr != (*itr2).end(); ++itr) {
-            
-            cout << *itr << endl;
-            
-            
-            if((*itr).find(" -=>> ") != string::npos) {
-                //cout << (*itr) << endl;
-            }
-            
-        }
-    }
-    */
     inFile.close();
     cout << "! Closing data file... ./Data.CS.SFSU.txt" << endl;
     
@@ -124,16 +106,11 @@ int main() {
             exit(0);
         }
         
-        //cout << "\t|" << endl;
-        
         vector<string> tempSearchDictionary;
         tempSearchDictionary = seperate(tempUserInputLine, " ");
         
         cout << "\t|" << endl;
-        
-        //cout << tempSearchDictionary[0] << endl
-        
-        
+
         string tempEmpty;
         
         if(tempSearchDictionary.size() == 1) {
@@ -171,8 +148,6 @@ int main() {
             }
             else if(checkIfMapContains(tempSearchDictionary[0], tempSearchDictionary[1], tempSearchDictionary[2], tempSearchDictionary.size())) {
                 
-                cout << "Hello " << endl;
-                
                 printTempDictionaryResult(tempSearchDictionary[0], tempSearchDictionary[1], tempSearchDictionary[2], tempSearchDictionary.size());
             }
             else {
@@ -181,16 +156,8 @@ int main() {
             }
             
         }
-        
-        
-        
+
         cout << "\t|" << endl;
-        
-        /*Testing to see if it handles the input
-        for(vector<string>::iterator itrx = tempSearchDictionary.begin(); itrx != tempSearchDictionary.end(); ++itrx) {
-            cout << *itrx << endl;
-        }
-        */ 
     }
     
     return 0;
@@ -209,17 +176,8 @@ void printTempDictionaryResult(string tempVector1, string tempVector2, string te
     tempSetToAdd.clear();
     
     for(map<string, vector<string>>::iterator it = kevinMap.begin(); it != kevinMap.end(); ++it) {
-            
-            //cout << it->first << endl;
-        /*
-        if(tempNotFound == false) {
-            cout << "\t <Not Found>" << endl;
-            break;
-        }
-        */  
+
             for(vector<string>::iterator vec = it->second.begin(); vec != it->second.end(); ++vec) {
-                
-                //This is a good setup, need to et rid of that arrow //cout << it->first << " [" << tempVector2 << "] " << *vec << endl;
                 
                 tempSplittedVector = seperate(*vec, " -=>> ");
                 
@@ -235,9 +193,7 @@ void printTempDictionaryResult(string tempVector1, string tempVector2, string te
                 }
                 //2nd word is "distinct" remove duplicates
                 else if(size == 2 && tempVector2 == "distinct" && (it->first == tempVector1)) {
-                    
-                    //cout << "\t " << it->first << " [" << tempSplittedVector[0] << "] : " << tempSplittedVector[1] << endl;
-                    
+                 
                     tempStringToAdd.clear();
                     tempStringToAdd = "\t " + it->first + " [" + tempSplittedVector[0] + "] : " + tempSplittedVector[1];
                     tempSetToAdd.insert(tempStringToAdd);
@@ -245,24 +201,11 @@ void printTempDictionaryResult(string tempVector1, string tempVector2, string te
                 
                 if(size == 3 && (it->first == tempVector1) && (tempSplittedVector[0] == tempVector2) && tempVector3 == "distinct") {
                     
-                    //cout << "\t " << it->first << " [" << tempSplittedVector[0] << "] : " << tempSplittedVector[1] << endl;
-                    
                     tempStringToAdd.clear();
                     tempStringToAdd = "\t " + it->first + " [" + tempSplittedVector[0] + "] : " + tempSplittedVector[1];
                     tempSetToAdd.insert(tempStringToAdd);
                 }
-                
-                
-                /* DO NOT DELETE THIS CODE, THIS IS TESTED TO WORK 100%
-                tempSplittedVector = seperate(*vec, " -=>> ");
-                
-                cout << it->first << " [" << tempSplittedVector[0] << "] : " << tempSplittedVector[1] << endl;
-                */
-                
-                //cout << it->first << " " << *vec << endl;
             }
-            
-            //cout << endl;
         } 
     
     if(size == 2 && tempVector2 == "distinct") {
@@ -277,24 +220,6 @@ void printTempDictionaryResult(string tempVector1, string tempVector2, string te
     }
 
 }
-
-
-//Method to search for the keyword user inputs
-//logic:
-//if vector inside map<string, vector<string>>
-//contains tempPartOfSpeech, then print the key and the value that contains that tempPartOfSpeech
-//
-//Now seperate the vector value that matches the key,
-//seperate by -=>> also called splitting
-//first one is the part of speech, second one will be definition
-//
-//splitted[0] is the partofspeech, splitted[1] is the definition
-//Make sure to have another new vector that holds splitted[0] and splitted[1]
-//
-//void checkIfContainsKey
-//void checkIfContainsSearchStuff
-
-//Check if the map contains the user input, especially keyword and part of speech
 
 bool checkPartOfSpeech(string tempPartOfSpeechToBeChecked) {
     
@@ -340,7 +265,6 @@ bool checkIfMapContains(string tempVector1, string tempVector2, string tempVecto
         for(vector<string>::iterator vec = it->second.begin(); vec != it->second.end(); ++vec) {
         
             tempSplittedVector = seperate(*vec, " -=>> ");
-            //((kevinMap.find(tempVector1) != kevinMap.end()) && (vectorSize == 2) && ((*vec).find(tempVector2) != string::npos)) || (tempVector2 == "distinct")
             
             if( (vectorSize == 2) && (tempSplittedVector[0] == tempVector2) || (tempVector2 == "distinct") ) {
                 
@@ -365,8 +289,7 @@ bool checkIfMapContains(string tempVector1, string tempVector2, string tempVecto
 }
 
 map<string, vector<string>> addMap(vector<string> kevin) {
-    //map<string, vector<string>> kevinMap;
-    
+   
     vector<string> temp;
     vector<string>::iterator itr;
     
@@ -381,10 +304,6 @@ map<string, vector<string>> addMap(vector<string> kevin) {
         if((*itr).find(" -=>> ") != string::npos) {
 
             tempValue = (*itr);
-            
-            //kevinMap[tempKey];
-            //My example how to insert, this is testing it to see if it works
-            //kevinMap.insert({tempKey, {"I want to be developer ", " The weather is hot! "}});
             
             //Finding the correct key to add the vector of strings to
             if(kevinMap.find(tempKey) == kevinMap.end()) {
@@ -403,51 +322,9 @@ map<string, vector<string>> addMap(vector<string> kevin) {
  
             tempKey = (*itr);
         } 
-        /*
-        if((*itr).find("-=>>") != string::npos) {
-            
-            if(kevinMap.find(tempKey) == kevinMap.end()) {
-            
-                kevinMap[tempKey] = temp;
-                temp.push_back((*itr));
-            }       
-        }*/
     }    
-        /*
-        for(map<string, vector<string>>::iterator it = kevinMap.begin(); it != kevinMap.end(); ++it) {
-            
-            //cout << it->first << " ";
-            
-            for(vector<string>::iterator vec = it->second.begin(); vec != it->second.end(); ++vec) {
-                
-                //cout << *vec;
-            }
-            
-            //cout << endl;
-        } 
-        */
-    
     return kevinMap;
 }
-
-//map<string, vector<vector<string>> addMap() {  
-    /*
-    vector<string>::iterator itr;
-    vector<vector<string>>::iterator itr2;
-    
-    for(itr2 = tempVector.begin(); itr2 != tempVector.end(); ++itr2) {
-        
-        for(itr = (*itr2).begin(); itr != (*itr2).end(); ++itr) {
-            
-            //cout << *itr << endl;
-            
-            if((*itr).find(" -=>> ") != string::npos) {
-                cout << (*itr) << endl;
-            }
-        }
-    }
-    */
-//}
 
 vector<string> seperate(string tempLineToSplit, string tempStringSplitter) {
     
@@ -463,13 +340,7 @@ vector<string> seperate(string tempLineToSplit, string tempStringSplitter) {
         tempLineToSplit.erase(0, tempCurrentPosition + tempStringSplitter.length());
     }
     tempSplittedVector.push_back(tempLineToSplit);
-    
-    /*
-    for(int i = 0; i < tempSplittedVector.size(); i++) {
-        
-        cout  << tempSplittedVector[i] << endl;
-    }
-    */
+
     return tempSplittedVector;     
 }
 
