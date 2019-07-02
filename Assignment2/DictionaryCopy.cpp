@@ -244,8 +244,6 @@ bool checkPartOfSpeech(string tempPartOfSpeechToBeChecked) {
         }
         else {
             
-            cout << tempFoundPartOfSpeech << endl;
-            
             tempFoundPartOfSpeech = false; 
         }
     }
@@ -400,4 +398,3 @@ string tempSelectPositionToCapitalize(string tempString, string spotToCapitalize
     }
     return tempString;
 }
-
