@@ -21,6 +21,7 @@ map<string, vector<string>> addMap(vector<string> temp);
 vector<string> seperate(string tempLineToSplit, string tempStringSplitter);
 string tempConvertToLowerCase(string tempString);
 string tempConvertToUpperCase(string tempString);
+string tempSelectPositionToCapitalize(string tempString, string spotToCapitalize);
 
 string tempPartOfSpeechArray[] = {"noun", "pronoun", "adjective", "verb", "adverb", "preposition", "conjunction", "interjection"};
 
@@ -95,9 +96,10 @@ int main() {
         tempUserInputLine[0] = toupper(tempUserInputLine[0]);
         //tempDataBaseDictionaryClassObject->setKeyWord(tempUserInputLine);
         //cout << tempDataBaseDictionaryClassObject->getTempKeyword() << endl;
-        if(tempUserInputLine.find("Csc") != string::npos)
-            tempUserInputLine = tempConvertToUpperCase(tempUserInputLine);
         
+        if(tempUserInputLine.find("Csc") != string::npos)
+            tempUserInputLine = tempSelectPositionToCapitalize(tempUserInputLine, "Csc");
+       
         if(tempUserInputLine == tempConvertToLowerCase("!q")) {
             
             tempSearchState = false; 
@@ -228,7 +230,8 @@ bool checkPartOfSpeech(string tempPartOfSpeechToBeChecked) {
     
     bool tempFoundPartOfSpeech = false;
     //If Distinct it is valid
-    if(tempPartOfSpeechToBeChecked.compare("distinct") == 0) {
+
+    if(tempPartOfSpeechToBeChecked == ("distinct")) {
         
         return true;
     }
@@ -240,6 +243,8 @@ bool checkPartOfSpeech(string tempPartOfSpeechToBeChecked) {
             return true;
         }
         else {
+            
+            cout << tempFoundPartOfSpeech << endl;
             
             tempFoundPartOfSpeech = false; 
         }
@@ -330,12 +335,10 @@ map<string, vector<string>> addMap(vector<string> kevin) {
             //Key is the String inside map as the key inside key and value pairs 
             tempKey = (*itr);
             
-            if(tempKey.find("csc") != string::npos) {
-                tempKey = tempConvertToUpperCase(tempKey);
-            }
-            else {
-                //Converting first letter to capital
-                tempKey[0] = toupper(tempKey[0]); 
+            tempKey[0] = toupper(tempKey[0]); 
+            
+            if(tempKey.find("Csc") != string::npos) {
+                tempKey = tempSelectPositionToCapitalize(tempKey, "Csc");
             }
         } 
     }    
@@ -386,4 +389,15 @@ string tempConvertToUpperCase(string tempString) {
     return tempString;
 }
 
+string tempSelectPositionToCapitalize(string tempString, string spotToCapitalize) {
+    
+    //Allows you to capitalize which part you want
+    //Maybe not always be needed, but can be used to capitalize parts of a word
+    if(tempString.find(spotToCapitalize) != string::npos) {
+        for(int i = 0; i < spotToCapitalize.size(); i++) {
+            tempString[i] = toupper(tempString[i]);
+        }
+    }
+    return tempString;
+}
 
