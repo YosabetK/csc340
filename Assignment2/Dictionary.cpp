@@ -20,6 +20,7 @@ map<string, vector<string>> addMap(vector<string> temp);
 
 vector<string> seperate(string tempLineToSplit, string tempStringSplitter);
 string tempConvertToLowerCase(string tempString);
+string tempConvertToUpperCase(string tempString);
 
 string tempPartOfSpeechArray[] = {"noun", "pronoun", "adjective", "verb", "adverb", "preposition", "conjunction", "interjection"};
 
@@ -94,6 +95,8 @@ int main() {
         tempUserInputLine[0] = toupper(tempUserInputLine[0]);
         //tempDataBaseDictionaryClassObject->setKeyWord(tempUserInputLine);
         //cout << tempDataBaseDictionaryClassObject->getTempKeyword() << endl;
+        if(tempUserInputLine.find("Csc") != string::npos)
+            tempUserInputLine = tempConvertToUpperCase(tempUserInputLine);
         
         if(tempUserInputLine == tempConvertToLowerCase("!q")) {
             
@@ -324,11 +327,16 @@ map<string, vector<string>> addMap(vector<string> kevin) {
         }
         //If Doesn't contain -=>> set the key as the given value from for loop
         else {
-            
             //Key is the String inside map as the key inside key and value pairs 
             tempKey = (*itr);
-            //Converting first letter to capital
-            tempKey[0] = toupper(tempKey[0]);       
+            
+            if(tempKey.find("csc") != string::npos) {
+                tempKey = tempConvertToUpperCase(tempKey);
+            }
+            else {
+                //Converting first letter to capital
+                tempKey[0] = toupper(tempKey[0]); 
+            }
         } 
     }    
     return kevinMap;
@@ -364,6 +372,15 @@ string tempConvertToLowerCase(string tempString) {
         //char will be assigned lowercase character
         tempChar = tolower(tempString[i]);
         //Then now assign the string the lowercase char
+        tempString[i] = tempChar;
+    }   
+    return tempString;
+}
+
+string tempConvertToUpperCase(string tempString) {  
+    char tempChar;
+    for(int i = 0; i < tempString.size(); i++) {
+        tempChar = toupper(tempString[i]);
         tempString[i] = tempChar;
     }   
     return tempString;
