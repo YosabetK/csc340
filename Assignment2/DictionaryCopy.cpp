@@ -27,8 +27,6 @@ class TempDataBaseDictionaryClass {
     
 private:    
     string tempKeyword, tempPartOfSpeech, tempDefinition;
-    
-    //map<string, vector<string>> tempStorageMap;
 
 public:    
     tempDataBaseDictionaryClass() {
@@ -76,9 +74,7 @@ int main() {
     inFile.close();
     cout << "! Closing data file... ./Data.CS.SFSU.txt" << endl;
     
-    //TempDataBaseDictionaryClass temp;
-    //getTempKeyword();
-    
+    TempDataBaseDictionaryClass *tempDataBaseDictionaryClassObject = new TempDataBaseDictionaryClass();
     //Here is checking the user input
     
     bool tempSearchState = true;
@@ -91,6 +87,10 @@ int main() {
         
         //convert all input into LowerCase
         tempUserInputLine = tempConvertToLowerCase(tempUserInputLine);
+        //Convert only first letter to be capital, so the Dictionary will display first letter as capital letter
+        tempUserInputLine[0] = toupper(tempUserInputLine[0]);
+        //tempDataBaseDictionaryClassObject->setKeyWord(tempUserInputLine);
+        //cout << tempDataBaseDictionaryClassObject->getTempKeyword() << endl;
         
         if(tempUserInputLine == tempConvertToLowerCase("!q")) {
             
@@ -102,7 +102,7 @@ int main() {
         vector<string> tempSearchDictionary;
         tempSearchDictionary = seperate(tempUserInputLine, " ");
         
-        cout << "\t|" << endl;
+        cout << "\t|" << endl; 
 
         string tempEmpty;
         
@@ -179,7 +179,7 @@ void printTempDictionaryResult(string tempVector1, string tempVector2, string te
                 tempSplittedVector = seperate(*vec, " -=>> ");
 
                 if(size == 1 && (it->first == tempVector1)) {
-                
+
                     cout << "\t " << it->first << " [" << tempSplittedVector[0] << "] : " << tempSplittedVector[1] << endl;
                 }
                 
@@ -300,7 +300,11 @@ map<string, vector<string>> addMap(vector<string> kevin) {
         
         //currently looping through the vector
         //If Contains -=>> count this as a value, put inside vector of strings
+        
         if((*itr).find(" -=>> ") != string::npos) {
+            
+            //Sort Vectors in order
+            sort(itr, kevin.end());
 
             tempValue = (*itr);
             
@@ -317,8 +321,11 @@ map<string, vector<string>> addMap(vector<string> kevin) {
         }
         //If Doesn't contain -=>> set the key as the given value from for loop
         else {
+            
             //Key is the String inside map as the key inside key and value pairs 
             tempKey = (*itr);
+            //Converting first letter to capital
+            tempKey[0] = toupper(tempKey[0]);       
         } 
     }    
     return kevinMap;
@@ -358,7 +365,5 @@ string tempConvertToLowerCase(string tempString) {
     }   
     return tempString;
 }
-
-
 
 
