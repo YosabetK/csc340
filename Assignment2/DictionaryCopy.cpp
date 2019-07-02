@@ -57,13 +57,16 @@ int main() {
     string line, line2, next;
     fstream inFile;
     cout << "! Opening data file... ./Data.CS.SFSU.txt" << endl;
-    if(!inFile) {
-        cout << "Cannot open the file: " << endl;
-    }
-    cout << "! Loading data..." << endl;
+
     //This is the File
     inFile.open("C:\\Users\\adazh\\OneDrive\\Desktop\\Data.CS.SFSU.txt", ios::in);
     
+    if(!inFile) {
+        cout << "Cannot open the file: " << endl;
+        exit(0);
+    }
+    
+    cout << "! Loading data..." << endl;
     //Reading the file line by line
     while(getline(inFile, line)) {
        //Seperate keyword and part of speech by "|"
@@ -173,10 +176,10 @@ void printTempDictionaryResult(string tempVector1, string tempVector2, string te
     
     for(map<string, vector<string>>::iterator it = kevinMap.begin(); it != kevinMap.end(); ++it) {
 
-            for(vector<string>::iterator vec = it->second.begin(); vec != it->second.end(); ++vec) {
+            for(vector<string>::iterator kevinVector = it->second.begin(); kevinVector != it->second.end(); ++kevinVector) {
                 
                 //This vector will have both the part of speech and the definition
-                tempSplittedVector = seperate(*vec, " -=>> ");
+                tempSplittedVector = seperate(*kevinVector, " -=>> ");
 
                 if(size == 1 && (it->first == tempVector1)) {
 
@@ -261,9 +264,9 @@ bool checkIfMapContains(string tempVector1, string tempVector2, string tempVecto
         }
         
         //Will return true if there is such valid argument, then false if not
-        for(vector<string>::iterator vec = it->second.begin(); vec != it->second.end(); ++vec) {
+        for(vector<string>::iterator kevinVector = it->second.begin(); kevinVector != it->second.end(); ++kevinVector) {
         
-            tempSplittedVector = seperate(*vec, " -=>> ");
+            tempSplittedVector = seperate(*kevinVector, " -=>> ");
             
             if( (vectorSize == 2) && (tempVector1 == (it->first)) && ((tempSplittedVector[0] == tempVector2) || (tempVector2 == "distinct")) ) {
                 
@@ -273,7 +276,7 @@ bool checkIfMapContains(string tempVector1, string tempVector2, string tempVecto
                 
                 tempContains = false;
             }   
-            if( (vectorSize > 2) && (tempSplittedVector[0] == tempVector2) && (tempVector3 == "distinct") ) {
+            if( (vectorSize > 2) && (tempVector1 == (it->first)) && (tempSplittedVector[0] == tempVector2) && (tempVector3 == "distinct") ) {
                 
                 return true;
             }
