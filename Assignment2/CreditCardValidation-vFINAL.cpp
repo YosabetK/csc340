@@ -40,49 +40,56 @@ bool isvalidcc(const string& tempCreditCardNumberString) {
     
     //cout << endl;
     
-    int tempTotalValue = 0;
+    int tempTotalCreditCardValueToBeChecked = 0;
     
-    int odd = 0;
-    int even = 0;    
+    int tempOddTotalValue = 0;
+    int tempEvenTotalValue = 0;    
     int tempEven = 0;
     int tempOdd = 0;
     
+    //Size is set to 15 for first number
+    //15-2 = 13, so i at 13 is 3, since 3 * 2 is not greater than 9, move to 8 * 2, which is greater than 9
+    //-2 every position because move 2 units left direction, every other position
+    
     for(int i = tempCreditCardNumberString.size() - 2; i >= 0; i -=2) {
-
-        if(i >= 0) {
             
+            //This temp value will hold the current position i is in, and only count one digit
+            //Since substring is of type string, we want to convert back to type int
             tempEven = stoi(tempCreditCardNumberString.substr(i, 1));
             
+            //Greater than 9 do this, else don't multiply
             if((tempEven * 2) > 9) {
                 
-                even = even + ((tempEven * 2) - 9);
+                //Testing, 8 * 2 = 16, 16 > 9
+                //16 = 1 + 6, same as 16 - 9 = 7
+                tempEvenTotalValue = tempEvenTotalValue + ((tempEven * 2) - 9);
                 
+                //Check all the correct values that will be looped
                 //cout << "Temp Even is: " << tempEven << ". Even is: " << even << endl;
             }
             else {
                 
-                even = even + (tempEven * 2);
+                tempEvenTotalValue = tempEvenTotalValue + (tempEven * 2);
                 
                  //cout << "Temp Even is: " << tempEven << ". Even is: " << even << endl;
 
             }
-        }
-    } 
+    }
+    //-1 because starting at first position, not second
     for(int j = tempCreditCardNumberString.size() - 1; j >= 0; j -=2) {
         
         tempOdd = stoi(tempCreditCardNumberString.substr(j, 1));
-        
-       if(j >= 0) {
+ 
+           tempOddTotalValue = tempOddTotalValue + (tempOdd);
            
-           odd = odd + (tempOdd);
-           
+           //Check all correct odd values
            //cout << "Temp odd is: " << tempOdd << ". Odd is: " << odd << endl;
-           
-       }
     }
-    tempTotalValue = odd + even;
-     
-    if(tempTotalValue % 10 == 0) {
+    //Adds both odd and even
+    tempTotalCreditCardValueToBeChecked = tempOddTotalValue + tempEvenTotalValue;
+
+    //check if divisible by 10
+    if(tempTotalCreditCardValueToBeChecked % 10 == 0) {
         
         return true;
     }
