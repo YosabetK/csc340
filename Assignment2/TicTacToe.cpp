@@ -1,6 +1,4 @@
 
-//It works has been tested for draws and wins! 6/25/2019
-
 /* 
  * File:   main.cpp
  * Author: Kevin Zhou
@@ -138,23 +136,32 @@ void makeAMove(char tempBoard[][3], char tempPlayer) {
     int tempRowPosition;
     int tempColPosition;
     
+    bool tempCurrentTurnComplete = false;
+    
     cout << "Enter a row (0, 1, 2) for player " << tempPlayer << "   :  ";
-    
     cin >> tempRowPosition;
-    
     cout << "Enter a column (0, 1, 2) for player " << tempPlayer << "   :  ";
-    
     cin >> tempColPosition;
     
-    for(int i = 0; i < 3; i++) {
-        
-        for(int j = 0; j < 3; j++) {
-            
-            //If there is a spot available and matches specific desired spot, place it
-            
-            if(i == tempRowPosition && j == tempColPosition && tempBoard[i][j] == ' ') 
-                tempBoard[i][j] = tempPlayer;
+        for(int i = 0; i < 3; i++) {
+
+            for(int j = 0; j < 3; j++) {
+
+                //If there is a spot available and matches specific desired spot, place it
+
+                if(i == tempRowPosition && j == tempColPosition && tempBoard[i][j] == ' ') { 
+                    tempBoard[i][j] = tempPlayer;
+                    tempCurrentTurnComplete = true;
+                }
+                else if(i == tempRowPosition && j == tempColPosition && tempBoard[i][j] != ' ') { 
+                    cout << "This cell is already occupied. Try a different cell" << endl;
+                    tempCurrentTurnComplete = false;
+                }
+            }
         }
+    
+    if(tempCurrentTurnComplete == false) {
+       makeAMove(tempBoard, tempPlayer);
     }
 }
 
@@ -167,10 +174,10 @@ void displayBoard(char tempBoard[][3]) {
         for(int j = 0; j < 3; j++) {
             
             cout << " | " << tempBoard[i][j];
-        }
-        
+        }       
         cout << " | "<< endl;
     }
+    cout << " -------------" << endl;
 }
 
 
