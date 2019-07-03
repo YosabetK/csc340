@@ -398,3 +398,10 @@ string tempSelectPositionToCapitalize(string tempString, string spotToCapitalize
     }
     return tempString;
 }
+
+
+
+
+
+
+
