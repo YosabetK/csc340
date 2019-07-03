@@ -36,7 +36,7 @@ int main()
 	return 0;
 }
 
-bool isvalidcc(const string& tempCreditCardNumberVector) {
+bool isvalidcc(const string& tempCreditCardNumberString) {
     
     //cout << endl;
     
@@ -47,11 +47,11 @@ bool isvalidcc(const string& tempCreditCardNumberVector) {
     int tempEven = 0;
     int tempOdd = 0;
     
-    for(int i = tempCreditCardNumberVector.size() - 2; i >= 0; i -=2) {
+    for(int i = tempCreditCardNumberString.size() - 2; i >= 0; i -=2) {
 
         if(i >= 0) {
             
-            tempEven = stoi(tempCreditCardNumberVector.substr(i, 1));
+            tempEven = stoi(tempCreditCardNumberString.substr(i, 1));
             
             if((tempEven * 2) > 9) {
                 
@@ -68,9 +68,9 @@ bool isvalidcc(const string& tempCreditCardNumberVector) {
             }
         }
     } 
-    for(int j = tempCreditCardNumberVector.size() - 1; j >= 0; j -=2) {
+    for(int j = tempCreditCardNumberString.size() - 1; j >= 0; j -=2) {
         
-        tempOdd = stoi(tempCreditCardNumberVector.substr(j, 1));
+        tempOdd = stoi(tempCreditCardNumberString.substr(j, 1));
         
        if(j >= 0) {
            
