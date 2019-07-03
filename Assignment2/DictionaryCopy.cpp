@@ -77,7 +77,9 @@ int main() {
        addMap(temp);
     }
     inFile.close();
+    cout << "! Loading completed..." << endl;
     cout << "! Closing data file... ./Data.CS.SFSU.txt" << endl;
+    cout << "\n----- Dictionary 340 C++ -----\n" << endl;
     
     TempDataBaseDictionaryClass *tempDataBaseDictionaryClassObject = new TempDataBaseDictionaryClass();
     //Here is checking the user input
