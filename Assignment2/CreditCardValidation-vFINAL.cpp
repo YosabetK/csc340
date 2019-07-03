@@ -38,54 +38,59 @@ int main()
 
 bool isvalidcc(const string& tempCreditCardNumberVector) {
     
+    //cout << endl;
+    
     int tempTotalValue = 0;
     
     int odd = 0;
-    int even = 0;
-     
+    int even = 0;    
     int tempEven = 0;
+    int tempOdd = 0;
     
-    for(int i = tempCreditCardNumberVector.size() - 2;  0 <= i; i -=2) {
+    for(int i = tempCreditCardNumberVector.size() - 2; i >= 0; i -=2) {
 
         if(i >= 0) {
             
-            tempEven = tempCreditCardNumberVector.at(i) - 48;
+            tempEven = stoi(tempCreditCardNumberVector.substr(i, 1));
             
-            if( (tempEven * 2 ) > 9 && (tempEven * 2) < 19) {
+            if((tempEven * 2) > 9) {
                 
-                even = even + ( ((tempCreditCardNumberVector.at(i) - 48) * 2) - 9);
+                even = even + ((tempEven * 2) - 9);
+                
+                //cout << "Temp Even is: " << tempEven << ". Even is: " << even << endl;
             }
             else {
                 
-                even = even + ((tempCreditCardNumberVector.at(i) - 48) * 2);
+                even = even + (tempEven * 2);
+                
+                 //cout << "Temp Even is: " << tempEven << ". Even is: " << even << endl;
 
             }
         }
-    }
-    
-    for(int j = tempCreditCardNumberVector.size() - 1;  0 <= j; j -=2) {
+    } 
+    for(int j = tempCreditCardNumberVector.size() - 1; j >= 0; j -=2) {
+        
+        tempOdd = stoi(tempCreditCardNumberVector.substr(j, 1));
         
        if(j >= 0) {
            
-           odd = odd + (tempCreditCardNumberVector.at(j) - 48);
+           odd = odd + (tempOdd);
+           
+           //cout << "Temp odd is: " << tempOdd << ". Odd is: " << odd << endl;
            
        }
     }
-
     tempTotalValue = odd + even;
      
-    if( tempTotalValue % 10 == 0) {
+    if(tempTotalValue % 10 == 0) {
         
         return true;
     }
     else {
         
         return false;
-    }
-    
+    }    
 }
-
-
 
 
 
