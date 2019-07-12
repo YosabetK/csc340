@@ -2,13 +2,6 @@
 //	LinkedBagClient340.cpp
 //	Created by: Duc Ta
 
-#include <iostream>
-#include <string>
-#include <vector>
-#include "LinkedBag.cpp"
-#include "LinkedBag340.cpp"
-//#include "LinkedBag.h"
-//#include "Node.h"
 
 
 
