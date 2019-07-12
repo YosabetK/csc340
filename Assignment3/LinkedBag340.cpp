@@ -20,22 +20,21 @@ bool LinkedBag<ItemType>::removeSecondNode340() {
     
     bool tempNodeIsRemoved = false;
     
-    //Assuming size is greater than equal to two, or else we won't be able to remove the second node, second node requires 2nd position
-    if(getCurrentSize() >= 2) {
+    //Assuming there is something inside here
+    if(!isEmpty()) {
         
         //Initializing to equal the first node we find
         Node<ItemType>* tempCurrentFirstNodeToRemove = headPtr;
         
         //As long as the current node we are looking at is not null continue, and not yet removed a node yet
-        if(tempCurrentFirstNodeToRemove != nullptr && tempNodeIsRemoved) {
+        if(tempCurrentFirstNodeToRemove != nullptr) {
             
             //Just holds the first item we find 
-            Node<ItemType>* tempCurrentItemToGet = headPtr;
-            
-            tempCurrentItemToGet = headPtr->getItem();
+            Node<ItemType>* tempCurrentItemToGet = new Node<ItemType>();
+            tempCurrentItemToGet = headPtr;
             
             //Next will be set to the next item from tempCurrentItem
-            headPtr->getNext()->setItem(*tempCurrentItemToGet);
+            headPtr->getNext()->setItem(tempCurrentItemToGet->getItem());
             
             //Move to next
             headPtr = headPtr->getNext();
@@ -44,7 +43,8 @@ bool LinkedBag<ItemType>::removeSecondNode340() {
             tempCurrentFirstNodeToRemove->setNext(nullptr);
             delete tempCurrentFirstNodeToRemove;
             tempCurrentFirstNodeToRemove = nullptr;
-
+            //itemCount--;
+            
             //If removed assigned to true
             tempNodeIsRemoved = true;
 
@@ -56,9 +56,33 @@ bool LinkedBag<ItemType>::removeSecondNode340() {
 
 // Adds/inserts a node to the end of the linked bag
 template<typename ItemType>
-bool LinkedBag<ItemType>::addEnd340(const ItemType&) {
+bool LinkedBag<ItemType>::addEnd340(const ItemType& tempNodeToBeAdded) {
     
-    return false;
+    bool tempNodeIsAdded = false;
+    
+    //The head of the node
+    Node<ItemType>* tempCurrentFirstNodeToCheck = headPtr;
+    Node<ItemType>* tempCurrentNewNode = new Node<ItemType>();
+    
+    //Making
+    if(!isEmpty()) {
+        
+        //Looping through to get the last position, if position->next is null, then that is last position
+        while(tempCurrentFirstNodeToCheck->getNext() != nullptr) {
+            
+            tempCurrentFirstNodeToCheck = tempCurrentFirstNodeToCheck->getNext();
+        }
+        
+        tempCurrentNewNode->setItem(tempNodeToBeAdded);
+        tempCurrentFirstNodeToCheck->setNext(tempCurrentNewNode);
+        itemCount++;
+    }
+    else {
+        //*headPtr = tempNodeIsAdded;
+        //headPtr->setItem(tempNodeToBeAdded);
+    }
+    
+    return tempNodeIsAdded;
 }
 
 
