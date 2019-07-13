@@ -1,14 +1,9 @@
 
 #include <iostream>
 #include <string>
-#include <vector>
-
-
 #include <cstddef>
-//#include <stdlib.h>
 #include <cstdlib>
 #include <ctime>
-
 #include "LinkedBag.h"
 
 using namespace std;
@@ -48,6 +43,11 @@ bool LinkedBag<ItemType>::removeSecondNode340() {
             //If removed assigned to true
             tempNodeIsRemoved = true;
 
+        }
+        //If it does become null, set it back to the node
+        else {
+            
+            tempCurrentFirstNodeToRemove = headPtr;
         }
     }
     
@@ -175,6 +175,7 @@ int LinkedBag<ItemType>::getCurrentSize340RecursiveNoHelper() const {
     }
     else {
         
+        //As long as its not null, just keep going to next node and adding one each time, then run recursive again
         if(tempCurrentFirstNodeToCheck != nullptr) {
             
             tempCurrentFirstNodeToCheck = tempCurrentFirstNodeToCheck->getNext();
@@ -211,6 +212,7 @@ int LinkedBag<ItemType>::getFrequencyOf340RecursiveHelper(Node<ItemType>* tempNo
     
     int tempNodeFrequencyCount = 0;   
     
+    //If it is null, return value
     if(tempNodeToBeChecked == nullptr) {
         
         return tempNodeFrequencyCount;
@@ -218,15 +220,17 @@ int LinkedBag<ItemType>::getFrequencyOf340RecursiveHelper(Node<ItemType>* tempNo
  
     else {
         
+        //If matches, add one
         if(tempNodeToBeChecked->getItem() == tempValueToBeChecked) {
             
             tempNodeFrequencyCount++;
             
             tempNodeToBeChecked = tempNodeToBeChecked->getNext();
         
+            //Add one and run recursive again
             return tempNodeFrequencyCount + getFrequencyOf340RecursiveHelper(tempNodeToBeChecked, tempValueToBeChecked);
         }
-        
+        //Else run this but don't add one
         else {
             
             tempNodeToBeChecked = tempNodeToBeChecked->getNext();
@@ -247,14 +251,17 @@ int LinkedBag<ItemType>::getFrequencyOf340RecursiveNoHelper(const ItemType& temp
     
     int tempNodeFrequencyCount = 0; 
     
+    //If empty, return 0
     if(isEmpty()) {
         
         return 0;
     }
     else {
         
+        //If not null, run the recursive method
         if(tempCurrentFirstNodeToCheck != nullptr) {
        
+            //If matches the value, add one and run recursive method
             if(tempCurrentFirstNodeToCheck->getItem() == tempValueToBeChecked) {
             
                 tempNodeFrequencyCount++;
@@ -262,7 +269,8 @@ int LinkedBag<ItemType>::getFrequencyOf340RecursiveNoHelper(const ItemType& temp
                 tempCurrentFirstNodeToCheck = tempCurrentFirstNodeToCheck->getNext();
         
                 return tempNodeFrequencyCount + getFrequencyOf340RecursiveNoHelper(tempValueToBeChecked);
-            }        
+            } 
+            //Run recursive, but don't add one
             else {
                 
                 tempCurrentFirstNodeToCheck = tempCurrentFirstNodeToCheck->getNext();
@@ -270,12 +278,14 @@ int LinkedBag<ItemType>::getFrequencyOf340RecursiveNoHelper(const ItemType& temp
                 return tempNodeFrequencyCount + getFrequencyOf340RecursiveNoHelper(tempValueToBeChecked);
             }
         }
+        //If it becomes null, reassign it back, so we can check again since it only sometimes skips null
         else {
             
             tempCurrentFirstNodeToCheck = headPtr;
         }
     }
 
+    //After everything is done, return final total value
     return tempNodeFrequencyCount;
 }
 
@@ -285,9 +295,78 @@ int LinkedBag<ItemType>::getFrequencyOf340RecursiveNoHelper(const ItemType& temp
 template<typename ItemType>
 ItemType LinkedBag<ItemType>::removeRandom340() {
     
+    //This should be the same as removing the last node method, except this time we just implement random on there
     
+    Node<ItemType>* tempCurrentFirstNodeToRemove = headPtr;
+    Node<ItemType>* tempCurrentItemToGet = new Node<ItemType>();
+    Node<ItemType>* tempCurrentNodeAsRandom = headPtr;
     
-    return 0;
+    int tempNodeSize = getCurrentSize340Iterative();
+    
+    //If there's nothing to remove, return null
+    if(tempNodeSize == 0 || tempCurrentFirstNodeToRemove == nullptr) {
+        
+        return nullptr;
+    }
+    
+    int tempRandom;
+    
+    //Without srand(), the rand() is always the current size, which is 9, so we need srand to set random integer
+    srand(time(nullptr));
+    
+    for(int i = 0; i < tempNodeSize; i++) {
+        
+        //tempRandom = rand() % 9; The result is 8, so add 1 then result will be 9
+        tempRandom = rand() % tempNodeSize + 1;
+    }
+    
+    //Since we added one to size earlier, we have to subtract it by one to reach the original
+    for(int i = 0; i < tempRandom - 1; i++) {
+        
+        //As long as not null, we can move to next
+        if(tempCurrentNodeAsRandom->getNext() != nullptr) {
+            
+            tempCurrentNodeAsRandom = tempCurrentNodeAsRandom->getNext();
+        }
+    }
+    
+    //The type node we will be return once we remove something random
+    ItemType tempNodeType;
+    
+    //Although size may be zero, should still check make sure its not null
+    
+    if(tempCurrentFirstNodeToRemove != nullptr) {
+        
+        //The node type should hold the next available randomly picked object
+        
+        tempNodeType = tempCurrentNodeAsRandom->getItem();
+        
+        if(tempCurrentItemToGet != nullptr) {
+            
+            tempCurrentItemToGet = headPtr;
+        
+            //Set the first random node we get, the head will point to node, and random will point to the head
+            tempCurrentNodeAsRandom->setItem(tempCurrentFirstNodeToRemove->getItem());
+    
+            //Move head to next
+            headPtr = headPtr->getNext();
+    
+            //Just removing the node and this is pointed to the head pointer
+            tempCurrentItemToGet->setNext(nullptr);
+            delete tempCurrentItemToGet;
+            tempCurrentItemToGet = nullptr;
+            //Also need to subtract each time
+            itemCount--;
+        }
+        //If it does become null, set it back to the top
+        else {
+            
+            tempCurrentItemToGet = headPtr;
+        }
+    }
+    
+    return tempNodeType;
+   
 }
         
         
