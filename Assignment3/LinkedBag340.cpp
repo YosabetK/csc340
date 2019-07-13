@@ -221,11 +221,18 @@ int LinkedBag<ItemType>::getFrequencyOf340RecursiveHelper(Node<ItemType>* tempNo
         if(tempNodeToBeChecked->getItem() == tempValueToBeChecked) {
             
             tempNodeFrequencyCount++;
+            
+            tempNodeToBeChecked = tempNodeToBeChecked->getNext();
+        
+            return tempNodeFrequencyCount + getFrequencyOf340RecursiveHelper(tempNodeToBeChecked, tempValueToBeChecked);
         }
         
-        tempNodeToBeChecked = tempNodeToBeChecked->getNext();
+        else {
+            
+            tempNodeToBeChecked = tempNodeToBeChecked->getNext();
         
-        return tempNodeFrequencyCount + getFrequencyOf340RecursiveHelper(tempNodeToBeChecked, tempValueToBeChecked);
+            return tempNodeFrequencyCount + getFrequencyOf340RecursiveHelper(tempNodeToBeChecked, tempValueToBeChecked);
+        }
     }
     
 }
@@ -234,18 +241,52 @@ int LinkedBag<ItemType>::getFrequencyOf340RecursiveHelper(Node<ItemType>* tempNo
 
 //recursively counts the number of times an entry appears in the linked bad. This recursive function does not use any helper functions
 template<typename ItemType>
-int LinkedBag<ItemType>::getFrequencyOf340RecursiveNoHelper(const ItemType&) const {
+int LinkedBag<ItemType>::getFrequencyOf340RecursiveNoHelper(const ItemType& tempValueToBeChecked) const {
  
+    static Node<ItemType>* tempCurrentFirstNodeToCheck = headPtr;
     
+    int tempNodeFrequencyCount = 0; 
     
-    return 0;
+    if(isEmpty()) {
+        
+        return 0;
+    }
+    else {
+        
+        if(tempCurrentFirstNodeToCheck != nullptr) {
+       
+            if(tempCurrentFirstNodeToCheck->getItem() == tempValueToBeChecked) {
+            
+                tempNodeFrequencyCount++;
+                
+                tempCurrentFirstNodeToCheck = tempCurrentFirstNodeToCheck->getNext();
+        
+                return tempNodeFrequencyCount + getFrequencyOf340RecursiveNoHelper(tempValueToBeChecked);
+            }        
+            else {
+                
+                tempCurrentFirstNodeToCheck = tempCurrentFirstNodeToCheck->getNext();
+        
+                return tempNodeFrequencyCount + getFrequencyOf340RecursiveNoHelper(tempValueToBeChecked);
+            }
+        }
+        else {
+            
+            tempCurrentFirstNodeToCheck = headPtr;
+        }
+    }
+
+    return tempNodeFrequencyCount;
 }
+
 
         
 //removes a random entry from the linked bag
 template<typename ItemType>
 ItemType LinkedBag<ItemType>::removeRandom340() {
     
+    
+    
     return 0;
 }
         
@@ -253,6 +294,7 @@ ItemType LinkedBag<ItemType>::removeRandom340() {
         
         
         
+
         
         
         
