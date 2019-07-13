@@ -29,7 +29,7 @@ bool LinkedBag<ItemType>::removeSecondNode340() {
         //As long as the current node we are looking at is not null continue, and not yet removed a node yet
         if(tempCurrentFirstNodeToRemove != nullptr) {
             
-            //Just holds the first item we find 
+            //Just holds the first temp item we find, 
             Node<ItemType>* tempCurrentItemToGet = new Node<ItemType>();
             tempCurrentItemToGet = headPtr;
             
@@ -43,7 +43,7 @@ bool LinkedBag<ItemType>::removeSecondNode340() {
             tempCurrentFirstNodeToRemove->setNext(nullptr);
             delete tempCurrentFirstNodeToRemove;
             tempCurrentFirstNodeToRemove = nullptr;
-            //itemCount--;
+            itemCount--;
             
             //If removed assigned to true
             tempNodeIsRemoved = true;
@@ -70,16 +70,21 @@ bool LinkedBag<ItemType>::addEnd340(const ItemType& tempNodeToBeAdded) {
         //Looping through to get the last position, if position->next is null, then that is last position
         while(tempCurrentFirstNodeToCheck->getNext() != nullptr) {
             
+            //Moving to next node
             tempCurrentFirstNodeToCheck = tempCurrentFirstNodeToCheck->getNext();
         }
         
+        //After loop ends, we are at last position and we can just add the node
         tempCurrentNewNode->setItem(tempNodeToBeAdded);
         tempCurrentFirstNodeToCheck->setNext(tempCurrentNewNode);
         itemCount++;
+        tempNodeIsAdded = true;
     }
     else {
-        //*headPtr = tempNodeIsAdded;
-        //headPtr->setItem(tempNodeToBeAdded);
+
+        //If empty just set it to the node to be added
+        headPtr->setItem(tempNodeToBeAdded);
+        itemCount++;
     }
     
     return tempNodeIsAdded;
@@ -91,29 +96,105 @@ bool LinkedBag<ItemType>::addEnd340(const ItemType& tempNodeToBeAdded) {
 template<typename ItemType>
 int LinkedBag<ItemType>::getCurrentSize340Iterative() const {
     
-    return 0;
-}
-
+    int tempTotalNodeCount = 0;
+    
+    if(isEmpty()) {
         
+        tempTotalNodeCount = 0;
+    }
+    
+    else {
+        
+        //Loop through all the nodes, then add one as we loop
+        for(Node<ItemType>* tempCurrentFirstNodeToCheck = headPtr; tempCurrentFirstNodeToCheck != nullptr; tempCurrentFirstNodeToCheck = tempCurrentFirstNodeToCheck->getNext()) {
+            
+            tempTotalNodeCount++;
+        }
+    }
+    
+    return tempTotalNodeCount;
+} 
+
 //counts the number of nodes in the linked bag recursively. use helper function
 template<typename ItemType>
 int LinkedBag<ItemType>::getCurrentSize340Recursive() const {
     
-    return 0;
+    Node<ItemType>* tempCurrentFirstNodeToCheck = headPtr;
+    
+    //If Empty return 0
+    if(isEmpty()) {
+        
+        return 0;
+    }
+    //If not empty, contains something, run the recursive helper method
+    else {
+        
+        return getCurrentSize340RecursiveHelper(tempCurrentFirstNodeToCheck);
+    }
 }
 
+template<typename ItemType>
+int LinkedBag<ItemType>::getCurrentSize340RecursiveHelper(Node<ItemType>* tempCurrentNodeToCheck) const {
+    
+    int tempTotalNodeCount = 0;
+    
+    //If the node we are checking is null, don't count it
+    if(tempCurrentNodeToCheck == nullptr) {
         
+        return tempTotalNodeCount;
+    }
+    else {
+        
+        //Double check to see if there is actually a node is null
+        if(tempCurrentNodeToCheck != nullptr) {
+            
+            tempCurrentNodeToCheck = tempCurrentNodeToCheck->getNext();
+            
+            //Add one as we move next
+            tempTotalNodeCount++;
+            
+            //As we add one, we have to also run the method again recursively as long as the next is null, until we reach end
+            return tempTotalNodeCount + getCurrentSize340RecursiveHelper(tempCurrentNodeToCheck);
+        }
+    }
+    
+}   
+
 //counts the number of nodes in the linked bag
 template<typename ItemType>
 int LinkedBag<ItemType>::getCurrentSize340RecursiveNoHelper() const {
     
-    return 0;
+    int tempTotalNodeCount = 0;
+    
+    static Node<ItemType>* tempCurrentFirstNodeToCheck = headPtr;
+    
+    if(isEmpty()) {
+        
+        return 0;
+        
+    }
+    else {
+        
+        if(tempCurrentFirstNodeToCheck != nullptr) {
+            
+            tempCurrentFirstNodeToCheck = tempCurrentFirstNodeToCheck->getNext();
+        
+            tempTotalNodeCount++;
+        
+            return tempTotalNodeCount + getCurrentSize340RecursiveNoHelper();
+        }
+        
+    }
+     
 }
+
 
         
 //recursively counts the number of times an entry appears in the linked bag
 template<typename ItemType>
 int LinkedBag<ItemType>::getFrequencyOf340Recursive(const ItemType&) const {
+    
+    
  
     return 0;
 }
