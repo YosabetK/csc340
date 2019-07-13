@@ -192,18 +192,52 @@ int LinkedBag<ItemType>::getCurrentSize340RecursiveNoHelper() const {
         
 //recursively counts the number of times an entry appears in the linked bag
 template<typename ItemType>
-int LinkedBag<ItemType>::getFrequencyOf340Recursive(const ItemType&) const {
+int LinkedBag<ItemType>::getFrequencyOf340Recursive(const ItemType& tempValueToBeChecked) const {
     
+    Node<ItemType>* tempCurrentFirstNodeToCheck = headPtr;
     
- 
-    return 0;
+    if(isEmpty()) {
+        
+        return 0;
+    }
+    else {
+        
+        return getFrequencyOf340RecursiveHelper(tempCurrentFirstNodeToCheck, tempValueToBeChecked);
+    }
 }
 
+template<typename ItemType>
+int LinkedBag<ItemType>::getFrequencyOf340RecursiveHelper(Node<ItemType>* tempNodeToBeChecked, const ItemType& tempValueToBeChecked) const {
+    
+    int tempNodeFrequencyCount = 0;   
+    
+    if(tempNodeToBeChecked == nullptr) {
         
+        return tempNodeFrequencyCount;
+    }
+ 
+    else {
+        
+        if(tempNodeToBeChecked->getItem() == tempValueToBeChecked) {
+            
+            tempNodeFrequencyCount++;
+        }
+        
+        tempNodeToBeChecked = tempNodeToBeChecked->getNext();
+        
+        return tempNodeFrequencyCount + getFrequencyOf340RecursiveHelper(tempNodeToBeChecked, tempValueToBeChecked);
+    }
+    
+}
+    
+
+
 //recursively counts the number of times an entry appears in the linked bad. This recursive function does not use any helper functions
 template<typename ItemType>
 int LinkedBag<ItemType>::getFrequencyOf340RecursiveNoHelper(const ItemType&) const {
  
+    
+    
     return 0;
 }
 
