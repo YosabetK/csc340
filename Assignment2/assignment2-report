@@ -1,0 +1,39 @@
+
+Part C Question 1: Program Analysis Explanation and Design 
+Answer/Summary/Discussion: The instructions for this assignment in particular is very similar to the previous 
+dictionary except it has to be read through a file and programmed in c++. The sample output is the same as the 
+Java Version, but when we read the files, we have to deal with the spaces and certain types of strings which didn’t exist 
+in the Java version because we created our own enum as the database. Although this version of the dictionary may be more difficult, 
+it allows us to make improvements in our dictionary and allows us to enhance our skills with c++. The problem is the almost same as 
+Java version, but one of the obstacles that we face in particular is the process of reading files that contain certain strings like 
+“|” or “-=>>” and not only add them to the data structure, but also have to sort them make them display in order according to the 
+alphabetical order of part of speech. Furthermore, the main data source we have is the SFSU file which contains all the information with 
+keywords and definitions, and we have to read everything from the file and add it into our data structure by calling the file name and 
+using the stream to take input from file. Once everything is added inside the data structure, the user can call the dictionary by 
+searching for specific keywords and part of speech and it will find the matching information in database and display it out for the user. 
+Nonetheless, for my data structure I used a map with string as the key and vector as the value. The string will hold all the keys that 
+match the keywords and the vectors to hold all the parts of speech and definitions. Reason why i used a map instead of an arraylist like 
+my previous java dictionary is because map seems easier to store data and find data. Once you match the keyword, you put the key from the 
+map, and if you want a part of speech, you just loop inside the vector and match the part of speech and display it out. If we were to look 
+at a real dictionary, it would also have a key and value pairs like the word then part of speech then definition based on the word. 
+Overall, I feel the map is great at adding or pulling data in the real world due to the data structure's benefit of key and value pairs. 
+
+Part C Question 2: Program Explanation 
+Answer/Summary/Discussion:
+My program does work properly and matches everything in the sample output exactly and can handle whatever user input the client decides 
+to type in and even display a message if file can’t be read. Although my program seems to be better than my previous dictionary, 
+improvements I could make would be to shorten the total lines of my code since it is very long. 
+
+Other Details: About sample output and photos
+I have also included my program’s output in a separate folder  that matches exactly like the sample output given to me for the 
+dictionary program. I have also included one image that shows the main cpp file inside the folder along with a text file in the same 
+folder. Calling C://users//filename - the file path directly on computer will work also.
+
+
+
+
+
+
+
+
+
