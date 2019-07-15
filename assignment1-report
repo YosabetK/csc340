@@ -1,0 +1,63 @@
+
+The images won't be included.
+
+
+Question Quick Start A1: “Welcome to CSC 340.01, 02 and 03” forum post
+Answer/Summary/Discussion:
+
+
+Question Quick Start A2: Grader/client information
+Answer/Summary/Discussion: Graders names and email are here: 
+Alexander Kohanim akohanim@mail.sfsu.edu 
+Alexander Wolski | awolski@mail.sfsu.edu
+
+Question Quick Start A3: Assignment Report Template Confirmation
+Answer/Summary/Discussion: Yes. This is to confirm that I have read all the guidelines for assignments including the “Assignment Report Template”
+
+Question Quick Start A4: Emailing
+Answer/Summary/Discussion: Yes. I will use my sfsu email when contacting the graders for this class using “csc 340.01 TIC” or CSC 340.02.TAC” format.
+
+Question Quick Start B1: Directory of “JAVA-TransferrableKnowledge” 
+Answer/Summary/Discussion: 
+
+
+
+
+
+Question Quick Start B2: Directory of “CPP-Reference” 
+Answer/Summary/Discussion:
+
+
+Question Quick Start C: Hello World program C++ Console App
+Answer/Summary/Discussion:
+
+
+
+Question Quick Start D: MyFavoriteApp.java
+Answer/Summary/Discussion: For quick start D, I have changed a favorite java program I wrote to MyFavoriteApp.java and this program welcomes you, then asks for name as input and asks whether you want to add or subtract followed two numbers. It will for sure display a correct number if the correct input is entered by the user. This program doesn’t work well if the user has entered a completely unexpected input when prompting for a string or a number. One improvement could be to make the program display incorrect or invalid input immediately if the user types in something unexpected rather than continuing to ask for the two numbers in my program then display invalid input. I should also have something that checks whether the input is indeed a string or a number. I could also add a while loop to continue through the program if the user wants to continue to add/subtract more numbers rather than ending it immediately within the first run in the main class.  This means that there should be an input as “quit” or “q” to exit the program at any time the user requests it. Overall, this does seem to solve many issues my program has, but if this is like a mini calculator, there should also be features such as multiplying or dividing to make it more interesting. Maybe I could also include math questions to challenge the user and increment the number of times the user got that question right and store in a variable counter. Then display the outcome when the user decides to eventually quit.
+
+
+
+
+
+Question Quick Start E: Shortcuts
+Answer/Summary/Discussion: I think control + F5 is pretty useful to run a program because I wouldn’t have to click run every single time - this is much more efficient. I also like rename command as Control + R because if I named my files incorrectly by accident, it would help with just a click of a command. I also like the comment command as control + C or control + K because i would type less code like don’t have to type // or /* */. Alt + up arrow or alt + down arrow i knew knew there was this kind of shortcut I only knew about using the mouse and scrolling it when i started using microsoft studio. Quick Find such as control + F is also good because if you want to search for a specific keyword and your code is way too long you might not be find your code, so it would be great to just search for keywords and find what you want easily.
+
+Question Part A: Discussion of Y. Daniel Liang’s Guidelines
+Answer/Summary/Discussion: In Object Oriented Programming, it is important to note that are special guidelines the programmer should directly follow for a great class design. One of the examples is best exemplified in java through Y. Daniel Liang’s 8 Class Design Guidelines. A great object oriented programming guideline to highlight would be known as Encapsulation. If we were to break the word Encapsulation a part, section by section, we would find the word capsule, which means a protective layer that shields or covers something important. In java, this would mean protecting any vulnerable data from the clients or the public. No developer or designer would ever want someone or something accessing data without permission. In this case, if we were to declare our variables in our class, we would change the type from public to private preventing access outside of our class, meaning only access is allowed through our own class. This is when the idea of getters and setters become important. Getters will give back data for the client to read, while setters will take in data and allow for data to be changed or updated. This way we can keep our data hidden through private, but also allow access through getters and setters. Finally, an example to show encapsulation would be to create a class called Phone with private variables batterySize, thickness, price, and camera. Then we could use getter to return the batterySize and camera, and use setter to update the price to meet consumer needs.
+
+Another very important guideline to mention is Inheritance vs Aggregation. If we were to design a software or program for a company we need to know the difference, and we can see this as comparing a relationship between is-a and has-a relationship. Is-a relationship is best exemplified through the usage of inheritance meaning one class will extend another class, and this is known as the sub class or child class extending a parent class or super class. The sub class will also inherit everything from super class. We can see this by saying a car is a vehicle, an apple is a fruit or a dog is an animal. The super class can be inherited by many classes, and even a cat class or a wolf class counts as an animal class because they both are types of animals, but are not exactly the same kind of animal. Furthermore, we can move on to has-a relationship, where has-a relationship has a class referring to something another class has. For example, we can look directly at the classes that relate to the animal class and demonstrate. A human has-a eye and mouth, a dog has-a eye and mouth, and a snake class has-a eye and mouth, but no legs. These classes physically contains a something another class has, but doesn’t necessarily mean they all contain the same characteristics. And all these three classes can be connected to the parent class as animal class where they could extend basically functionally such as eyes, and age variables. If we wanted to design something important in a company, we would need to draw a map of classes that relate to each other starting from parent class and going down to subclasses and include any important references to other objects.
+
+Question Part B: Program Analysis to Program Design explanation
+Answer/Summary/Discussion: In this programming analysis to design and implement a java interactive dictionary is undoubtedly very crucial to understand all the provided information for creating a dictionary for the user because we, the developers of the program, must follow a specific guideline to meet the user’s expectations or goals. The sample output is the goal or final product we are trying to achieve and the guidelines provided to us is like the receipt for developing something - like receipt for baking cake. In a business, we want our company to expand and make money, but more importantly, we want our customers to be satisfied; and if they’re satisfied, it means our product works and other customers will likely buy it as well. So, we want to follow every guideline step by step, and come up with our designs to reach the final output. In addition, the main problem we are trying to solve is how are we able to store consumer data or anything data in general and be able to retrieve data from the data source if requested by the user. If the client wants to store data and wants to request data back to them, we need to think of a way to solve it. One solution could be handling client input and searching for anything that matches it. If we want to see a bigger picture, we can look directly at the data that stores computer science courses at San Francisco State University. The catalog that displays all the classes is so large that there must be a way to store the data and be able to retrieve it if needed. The website that makes up San Francisco State University is developed by html, css, javascript and many more, but the database that stores the data is something separate itself and for our java interactive dictionary, we need to do the same by making something that separates our database from the code we write in our program. Nonetheless, if we want to store data in enum objects, we must first know that enum is just a normal class and we declare a class called enum as pass in as many constructors as we want and those constructors can carry the arguments we pass into it. These are enums, which are objects that store information for something in particular, like computer science classes with units or description inside the constructor. Enums are good to use when having a large set of information that need to be stored for later use. For me, I use a few arraylists to hold the data from the enum. If I want to iterate over an arraylist i can use the enhanced for loop or an iterator to do that and in case i want to avoid duplicates I can just use a hashset because hashsets do not allow duplicates. Reason I would use an arraylist because it is easy to store information and easy to take out like just calling add and looping to get information out.
+
+
+
+
+
+
+
+
+
+
+
