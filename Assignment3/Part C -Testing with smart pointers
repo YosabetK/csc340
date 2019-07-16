@@ -1,4 +1,6 @@
 //This removeSecondNode340() 100% Compiles
+//Using smart pointers part is 100% made by me, not googled or copied, took me sometime to figure out how it works. 
+//Still not 100% understood yet.
 
 template<typename ItemType>
 bool LinkedBag<ItemType>::removeSecondNode340() 
@@ -18,6 +20,17 @@ bool LinkedBag<ItemType>::removeSecondNode340()
 
    	 return remove(head->getItem());		// remove the second item
 } 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
