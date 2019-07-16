@@ -22,6 +22,41 @@ bool LinkedBag<ItemType>::removeSecondNode340()
 } 
 
 
+//Unique Pointer for removeSecondNode340 still works
+
+template<typename ItemType>
+bool LinkedBag<ItemType>::removeSecondNode340() 
+{
+	   Node<ItemType>* nodeToDeletePtr = headPtr->getNext();
+
+     //shared_ptr<Node<ItemType>> head;
+
+    unique_ptr<Node<ItemType>> head = make_unique<Node<ItemType>>(); 
+
+     head->getItem() = nodeToDeletePtr->getItem();
+
+     head->setItem(nodeToDeletePtr->getItem());
+
+     cout << "HI" << head->getItem() << endl;
+
+
+   	 return remove(head->getItem());		// remove the second item
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
