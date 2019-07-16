@@ -1,0 +1,25 @@
+//This removeSecondNode340() 100% Compiles
+
+template<typename ItemType>
+bool LinkedBag<ItemType>::removeSecondNode340() 
+{
+	   Node<ItemType>* nodeToDeletePtr = headPtr->getNext();
+
+     //shared_ptr<Node<ItemType>> head;
+
+    shared_ptr<Node<ItemType>> head = make_shared<Node<ItemType>>(); 
+
+     head->getItem() = nodeToDeletePtr->getItem();
+
+     head->setItem(nodeToDeletePtr->getItem());
+
+     cout << "HI" << head->getItem() << endl;
+
+
+   	 return remove(head->getItem());		// remove the second item
+} 
+
+
+
+
+
