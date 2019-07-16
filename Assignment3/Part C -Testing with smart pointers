@@ -51,6 +51,43 @@ bool LinkedBag<ItemType>::removeSecondNode340()
 
 
 
+//Unfinished
+
+//  addEnd340()
+template<typename ItemType>
+bool LinkedBag<ItemType>::addEnd340(const ItemType& newEntry) 
+{
+	   Node<ItemType> *curPtr = headPtr;		// start from the head
+
+     unique_ptr<Node<ItemType>> head = make_unique<Node<ItemType>>(); 
+
+     head->getItem() = curPtr->getItem();
+
+     head->setItem(curPtr->getItem());
+
+     head->setNext(curPtr->getNext());
+	
+	     while (curPtr->getNext() != nullptr) 
+       {	                                   
+		      curPtr = curPtr->getNext();      //use while loop to find the last node
+	     }
+       
+    head = head->getNext();   
+	   
+ 	 Node<ItemType> *newNodePtr = new Node<ItemType>();       //create a new node
+	 newNodePtr->setItem(newEntry);
+	 curPtr->setNext(newNodePtr);
+   head->setItem(newNodePtr->getItem());
+   //curPtr->setNext(head->getItem());
+  
+   cout << head->getItem() << endl;
+
+	 itemCount++;
+	 return true;
+} 
+
+
+
 
 
 
