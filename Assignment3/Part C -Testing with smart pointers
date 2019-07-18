@@ -2,6 +2,8 @@
 //Using smart pointers part is 100% made by me, not googled or copied, took me sometime to figure out how it works. 
 //Still not 100% understood yet.
 
+(This won't be the code i will submit, only for practice and testing)
+
 template<typename ItemType>
 bool LinkedBag<ItemType>::removeSecondNode340() 
 {
