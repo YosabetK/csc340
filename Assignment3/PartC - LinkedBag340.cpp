@@ -29,12 +29,21 @@ bool LinkedBag<ItemType>::removeSecondNode340() {
             Node<ItemType>* tempCurrentItemToGet = new Node<ItemType>();
             tempCurrentItemToGet = headPtr;
             
+            //The temporary Node that will be deleted
             Node<ItemType>* tempSmartPointerValueNode = new Node<ItemType>();
             
-            shared_ptr<Node<ItemType>> tempSharedPointer = make_shared<Node<ItemType>>();
+            //Creation of the Unique Pointer, Shared pointer can work as well
+            unique_ptr<Node<ItemType>> tempSharedPointer = make_unique<Node<ItemType>>();
             
+            //We are setting the unique pointer a value of this item
             tempSharedPointer->setItem(tempCurrentFirstNodeToRemove->getItem());
             
+            //The raw pointer will hold the data that unique pointer contains
+            //We are setting temporary Node because this is the node in particular we want to delete, 
+            //Isn't easy to just delete smart pointer by calling it directly with Node<ItemType> inside it
+            //If we delete the headPtr node it can cause wrong output
+            //tempCurrentFirstNodeToRemove will hold headPtr value
+            //tempSmartPointerValueNode will be deleted as it refers to value of smart pointer which is same as headPtr
             tempSmartPointerValueNode->getItem() = tempSharedPointer->getItem();
             
             //Next will be set to the next item from tempCurrentItem
