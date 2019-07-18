@@ -82,6 +82,17 @@ bool LinkedBag<ItemType>::addEnd340(const ItemType& tempNodeToBeAdded) {
     Node<ItemType>* tempCurrentFirstNodeToCheck = headPtr;
     Node<ItemType>* tempCurrentNewNode = new Node<ItemType>();
     
+    //Creating Smart pointer
+    Node<ItemType>* tempSmartPointerValueNode = new Node<ItemType>();
+            
+    shared_ptr<Node<ItemType>> tempSharedPointer = make_shared<Node<ItemType>>();
+        
+    //Smart pointer contains the new value to be added in the paramter    
+    tempSharedPointer->setItem(tempNodeToBeAdded);
+
+    //The regular point will hold the value
+    tempSmartPointerValueNode->setItem(tempSharedPointer->getItem());
+    
     //Making
     if(!isEmpty()) {
         
@@ -92,9 +103,9 @@ bool LinkedBag<ItemType>::addEnd340(const ItemType& tempNodeToBeAdded) {
             tempCurrentFirstNodeToCheck = tempCurrentFirstNodeToCheck->getNext();
         }
         
-        //After loop ends, we are at last position and we can just add the node
-        tempCurrentNewNode->setItem(tempNodeToBeAdded);
-        tempCurrentFirstNodeToCheck->setNext(tempCurrentNewNode);
+        //tempCurrentFirstNodeToCheck keeps track of head and will also setNext which will add the node the has the value of smart pointer
+        //Isn't easy to just call the smart pointer directly, so I just access the values of it, but it has same value that is correct
+        tempCurrentFirstNodeToCheck->setNext(tempSmartPointerValueNode);
         itemCount++;
         tempNodeIsAdded = true;
     }
