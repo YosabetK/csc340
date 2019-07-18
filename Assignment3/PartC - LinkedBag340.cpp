@@ -127,6 +127,10 @@ int LinkedBag<ItemType>::getCurrentSize340Iterative() const {
     
     int tempTotalNodeCount = 0;
     
+    unique_ptr<Node<ItemType>> tempSharedPointer = make_unique<Node<ItemType>>();
+            
+    //tempSharedPointer->getItem() = headPtr->getItem();
+    
     if(isEmpty()) {
         
         tempTotalNodeCount = 0;
@@ -135,6 +139,7 @@ int LinkedBag<ItemType>::getCurrentSize340Iterative() const {
     else {
         
         //Loop through all the nodes, then add one as we loop
+        
         for(Node<ItemType>* tempCurrentFirstNodeToCheck = headPtr; tempCurrentFirstNodeToCheck != nullptr; tempCurrentFirstNodeToCheck = tempCurrentFirstNodeToCheck->getNext()) {
             
             tempTotalNodeCount++;
@@ -362,8 +367,11 @@ ItemType LinkedBag<ItemType>::removeRandom340() {
     //The type node we will be return once we remove something random
     ItemType tempNodeType;
     
-    //Although size may be zero, should still check make sure its not null
+    shared_ptr<Node<ItemType>> tempSharedPointer = make_shared<Node<ItemType>>();
     
+    tempSharedPointer->setItem(tempCurrentFirstNodeToRemove->getItem());
+    
+    //Although size may be zero, should still check make sure its not null
     if(tempCurrentFirstNodeToRemove != nullptr) {
         
         //The node type should hold the next available randomly picked object
@@ -372,10 +380,12 @@ ItemType LinkedBag<ItemType>::removeRandom340() {
         
         if(tempCurrentItemToGet != nullptr) {
             
-            tempCurrentItemToGet = headPtr;
+            tempCurrentItemToGet->getItem() = tempSharedPointer->getItem();
+            
+            tempCurrentItemToGet->setItem(tempSharedPointer->getItem());
         
             //Set the first random node we get, the head will point to node, and random will point to the head
-            tempCurrentNodeAsRandom->setItem(tempCurrentFirstNodeToRemove->getItem());
+            tempCurrentNodeAsRandom->setItem(tempSharedPointer->getItem());
     
             //Move head to next
             headPtr = headPtr->getNext();
@@ -390,7 +400,7 @@ ItemType LinkedBag<ItemType>::removeRandom340() {
         //If it does become null, set it back to the top
         else {
             
-            tempCurrentItemToGet = headPtr;
+            tempCurrentItemToGet->getItem() = tempSharedPointer->getItem();
         }
     }
     
