@@ -1,5 +1,9 @@
 //The Extra Credit is all the way on the bottom
-
+//Also you would need to change the main class, call bag->specialTest(bag)
+//Also need to add
+//unique_ptr<LinkedBag<ItemType>> specialTest(unique_ptr<LinkedBag<string>>&);
+//To LinkedBag.h
+//Make sure to include using namespace std; and include# <memory>
 
 
 
