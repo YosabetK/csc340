@@ -1,0 +1,96 @@
+//Length is 9 pages double spaced!
+
+
+
+
+
+
+
+
+
+
+Part A Question 1: Smart Pointers and Explanation 
+Answer/Summary/Discussion: In c++ we do deal with a lot of memory management such as pointers and memory addresses, and in some cases, we may call a specific memory, and if we want to delete it, we delete it, but sometimes we might accidentally delete it twice. This result can occur if we have two pointers address same dynamically allocated object and when we delete we may think it's perfectly okay, and when we delete it twice something unexpected can occur. The program could still run perfectly fine, cause compile error, crash, or cause other memory problems like memory leaks after affecting the freestore. Deleting it means you no longer own it, for example, if you sell your textbook to the bookstore its gone, you cannot resell it twice or even three times. This is not good practice to delete it twice, but below is an example to exemplify this. 
+int main() {
+string *oldTextGameBookGuide = new string();
+String *book2 = oldTextGameBookGuide;
+delete oldTextGameBookGuide;
+delete book2;
+return 0;
+}
+Removing the delete book2 will cause the IDE to run correctly with no issues, but just as we call double delete pointers that reference the same object twice will cause a failed run and can be dangerous. So it isn’t good practice to do this. Sometimes not easy to realize this could’ve been one issue inside a programmers program. 
+Part A Question 2: Smart Pointers and Explanation 
+Answer/Summary/Discussion: This statement here tells us that objects must be allocated using the new keyword and is common in many object creations like string *youtube = new string; and if we want to delete it, we simply use call the delete keyword. And in this statement in particular, or this topic in general, we must use smart pointers and they generally help manage the raw pointers’ lifetime for the object that is being pointed to. Regular pointers can still be used and will function as normal, but in general it is a better practice to use smart pointers overall, and depending on what situation, we can choose unique_ptr or shared_ptr. The main idea is that smart pointers are called “smart” and are meant to help us deal with problems in regular pointers just like smart phones compared to regular phones. For regular pointers, we would have to worry about deleting some type of object, whereas the smart pointers upon creation, we can assume will destroy the object after the function or main ends automatically. Therefore we wouldn’t need to worry about deleting after the program exits or function ends. 
+We wouldn’t need to delete it like in the first sample, but here is the example for new:
+int main() {
+unique_ptr<string> kevin(new string());
+cout << “Kevin pointer is: “ << &kevin << endl;
+return 0;
+}
+Result should print letters and numbers as the result.
+Part A Question 3: Smart Pointers and Explanation 
+Answer/Summary/Discussion: Data members of classes are connected to the object itself for any class if you declare them even for objects that don’t specifically use a smart pointer. For the smart pointer, it involves the scope of the object inside the smart pointer just like there is scope inside a regular data members of classes that do not contain a smart pointer. So the scope of that smart pointer is wherever the function is declared in, and since it deletes itself after the program ends or the function ends, all the data that is connected to it will be gone as well even without calling the delete on the smart pointer. The lifetime of that object is the lifetime of that smart pointer and when it gets deleted, or when it ends, the object that holds the data will be deleted as well.  It also doesn’t require anything from the destructor since lifetime is based on where the smart pointer was declared. 
+void playAGame() {
+unique_ptr<string> kevin(new string());
+}
+The smart pointer is only within the scope of that function and is deleted after it ends and all data members connected to that is deleted as well.
+Part A Question 4: Smart Pointers and Explanation 
+Answer/Summary/Discussion: Yes, it is true that converting unique_ptr to shared_ptr is easy because since unique_ptr is mainly used as the uniqie_ptr meaning it has only one ownership while shareed_ptr has shared ownership and can easily share ownership. So we would have to create a new smart pointer as unique_ptr by calling new and then create a shared pointer as shared_ptr. We would then use move to convert the unique_ptr to a shared_ptr. We could also use get with caution to see what the unique_ptr is and dereference an object by using the asterisk to see the object or we could also get memory address as well. 
+int main() {
+    unique_ptr<string> kevin(new string("Marvel Avenger's Endgame Movie is a good movie!"));
+    cout << "Kevin pointer is: " << &kevin << endl; 
+    cout << "using get is: " << kevin.get() << endl;
+    cout << "using asterisk is: " << *kevin << endl;
+    shared_ptr<string> kevinShared(move(kevin));
+    cout << "\nKevin pointer is: " << &kevin << endl;
+    //cout << "using get is: " << kevin.get() << endl;
+    //cout << "using asterisk is: " << *kevin << endl;  
+    //Those commented code doesn't fully run as expected because it is shared_ptr now which has been moved
+    cout << "\nCalling shared_ptr, using get is: " << kevinShared.get() << endl;
+    cout << "Calling shared_ptr, using asterisk is: " << *kevinShared << endl;
+    return 0;
+}
+Should display this, but not necessarily the same for different computer:
+Kevin pointer is: 0xffffcc00
+using get is: 0x6000127f0
+using asterisk is: Marvel Avenger's Endgame Movie is a good movie!
+Kevin pointer is: 0xffffcc00
+Calling shared_ptr, using get is: 0x6000127f0
+Calling shared_ptr, using asterisk is: Marvel Avenger's Endgame Movie is a good movie!
+The unique_ptr will not have a value if you move it to shared_ptr as demonstrated in this example.
+Part A Question 5: Smart Pointers and Explanation 
+Answer/Summary/Discussion:
+Dangling pointers are a great concept to know about and the main idea about that is that dangling pointers are pointers that point to something in particular that is no longer has value,or is no longer valid, let’s say null for example. This dangling pointer applies to all those pointers we write in our program and this does happen sometimes when we type our code. And furthermore, unique_ptr, shared_ptr and weak_ptr are all in part connected to each other in the name of smart pointers, but are also slightly different. So, unqiue_ptr is the unique ownership essentially, shared_ptr is when multiple things reference the same object and weak_ptr doesn’t own any object and has no power in these effects of the object: altering the lifetime, deleting object, and counting when referencing. With all these disadvantages it makes it called a weak_ptr and also will depend on the shared_ptr as a result because it will need shared_ptr to handle that object upon reference so weak_ptr can handle that.
+Here is an example: 
+int main() {
+    shared_ptr<string> kevin(make_shared<string>("Summer feels short to me!"));
+    cout << "Address of Kevin pointer is: " << addressof(*kevin) << endl;
+    weak_ptr<string> kevin2(kevin);
+    cout << "Address of Kevin2 pointer is: " << addressof(kevin2) << endl;    
+    cout << "Testing count on Kevin pointer is: " << kevin.use_count() << endl;
+    cout << "Testing count on Kevin2 pointer is: " << kevin2.use_count() << endl;    
+    cout << "Testing expired on Kevin2 pointer is: " << kevin2.expired() << endl;    
+    if(shared_ptr<string> dogs = kevin2.lock()) {
+        
+        cout<< "initialized, is not empty" << endl;
+    }
+    return 0;
+}
+The result should display this:
+Address of Kevin pointer is: 0x600012800
+Address of Kevin2 pointer is: 0xffffcbf0
+Testing count on Kevin pointer is: 1
+Testing count on Kevin2 pointer is: 1
+Testing expired on Kevin2 pointer is: 0
+initialized, is not empty
+
+RUN SUCCESSFUL
+This is the end of the test. Expire will help check if it was deleted or not and it gave a zero to tell us. And you can use lock to check the object of weak_ptr. This helps us show how the weak_ptr differentiates from unique_ptr and shared_ptr and see what it can do. If we can access weak_ptr we should definitely call the lock() from shared_ptr. 
+Part B: Linked Bag340 cpp files with 8 functions
+Answer/Summary/Discussion: This part of the assignment is done inside the LinkedBag340 file with changes inside the include.h file. All of this is inside the zip file.
+Part C: Linked Bags with Smart Pointers file changes 
+Answer/Summary/Discussion: Part C was essentially the same as Part B except with smart pointers included inside the program or functions. Part A we had to explain each statement in depth with great examples and that wasn’t easy, and just as moved on to part B everything got a lot more difficult. The adding and remove node parts from LinkedBag and especially the last part where we had to remove a random node<ItemType> from the bag seemed more difficult compared to the recursive/non-recursive functions. So, for Part C mainly, I have included the smart pointers in removesecond, addend, and removerandom functions. Reason why I chose to not add smart pointer in recursive/non-cursive functions because I felt that without the smart pointers when counting the number of appearances of that particular item it would be much quicker and more efficient even though smart pointers may be more memory efficient. I don’t think smart pointers would be that useful here since we only need to loop through the nodes and just count what we pull out of the node that is based on where headPtr is going. For removesecond I had it declared at line 36 where the smart pointer is declared and that item I’m setting to will be based on headPtr which is what the temp node holds. Since it isn’t easy to directly access Unique<Node<Item>> directly I just assigned a node to access that. And by setting the node to nullptr and deleting is a proper way to remove that node that holds the data coming from the smart pointer. And for addend it is very similar, where we declare smart pointer in line 88 and set the Item it will be holding to the one that comes into the parameter of the function and just headPtr to point to the new node which is the same as saying temp node to point to that. For the randomnode part function, the smart pointer is declared in line 370, reason why I use shared pointer because it allows both random node and smart pointer to point to headPtr and allows multiple references. And also temp random node will be set to what item it pulls out from the shared pointer in line 390. 
+PartC_SmartPointers will be the folder that contains functions with smart pointers, and PartB_SmartPointers will be the folder that contains the destructor. All the destructor will do is when you delete something, it will say deleted object. 
+Part D: Extra Credit - Linked Bags Creativity after copy of Part C 
+Answer/Summary/Discussion: PartD will be inside the Assignment3_PartD Folder and will be Assignment_PartD_Output Folder to show the output. Open all needed files to run Part D. So, Part D is the same as PartB or PartC, except LinkedBag340.cpp will have a new function that checks the contents in the bag and display the result based on it. Also, the Main file will have bag using the new function after displaying the contents after each run. It is updated.
+It was difficult to brainstorm a creative idea for part D, like brainstorming a new invention or concept that could potentially solve real world problems or potentially create new changes. I tried to keep the function simply and easy to read and also provided the client with some great information relating to the contents of the bag. So, this function in particular will take in a smart pointer as a bag in the parameter of the function and convert it to a vector to make things a lot easier and help the client get the sum, average, number of evens and also the number of odds. All the user sees is the strings with begin and end with numbers. If the user ever wanted to count the value of each bag, the new function will help them solve their problems without using a calculator -- will save plenty of time. We could have bag with a size of 100 numbers and the function would still be able to count it rather than the user manually inputting each number into the calculator 100 times. To sum up, the vector will loop through the contents and as we get the value, we use substring to get the first character which is the number and increment that to counter variable and after we reach the end, cout will display the final result for the user. 
