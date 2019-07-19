@@ -1,4 +1,27 @@
-//Get number odds and evens?
+//The Extra Credit is all the way on the bottom
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 #include <iostream>
@@ -447,6 +470,8 @@ unique_ptr<LinkedBag<ItemType>> LinkedBag<ItemType>::specialTest(unique_ptr<Link
    int count = 0;
    int tempTotalSumBag = 0;
    double tempAverage = 0;
+   int tempEvenCount = 0;
+   int tempOddCount = 0;
    
    vector<string>::const_iterator itr;
    
@@ -462,6 +487,12 @@ unique_ptr<LinkedBag<ItemType>> LinkedBag<ItemType>::specialTest(unique_ptr<Link
                 tempTotalSumBag += stoi(tempString);
                 tempAverage += stoi(tempString);
                 count++;
+                if(stoi(tempString) % 2 == 0) {
+                    tempEvenCount++;
+                }
+                else {
+                    tempOddCount++;
+                }
             }
 
             
@@ -472,11 +503,11 @@ unique_ptr<LinkedBag<ItemType>> LinkedBag<ItemType>::specialTest(unique_ptr<Link
    
    cout << "Total sum of bag in numbers is: " << tempTotalSumBag << endl;
    cout << "Average sum of bag in numbers is: " << tempAverage / count << endl;
+   cout << "Total Number of evens: " << tempEvenCount << ". Total Number of odds: " << tempOddCount << endl;
     
-    return nullptr;
+    return tempSmartPointerBagToTest;
  }      
         
-
 
         
         
@@ -487,6 +518,5 @@ unique_ptr<LinkedBag<ItemType>> LinkedBag<ItemType>::specialTest(unique_ptr<Link
         
        
         
-
 
 
