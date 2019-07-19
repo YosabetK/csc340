@@ -4,6 +4,27 @@
 
 (This won't be the code i will submit, only for practice and testing)
 
+Forget the code below this code down here, this is a real way to do it, make sure headPtr is used as headPtr = headPtr->getNext() 
+
+unique_ptr<Node<ItemType>> LinkedBag<ItemType>::specialTest(unique_ptr<Node<ItemType>>& tempSmartPointerNode) {
+
+unique_ptr<LinkedBag<ItemType>> tempBag = make_unique <LinkedBag<ItemType>>();
+    
+    vector<string> items { headPtr->getItem(), headPtr->getItem(), headPtr->getItem(), headPtr->getItem() };
+	cout << " !add()...     ";
+	vector<string>::const_iterator cItr;
+	for (cItr = items.begin(); cItr  != items.end(); cItr++) {
+		cout << *cItr << " ";
+		tempBag->add(*cItr);
+	}
+}	
+
+
+
+//Forget below
+
+
+
 template<typename ItemType>
 bool LinkedBag<ItemType>::removeSecondNode340() 
 {
